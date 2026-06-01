@@ -2,3 +2,5 @@ node_modules/
 .state/
 *.log
 .DS_Store
+.agents/
+package-lock.json

@@ -10,13 +10,15 @@ Capabilities are probed at runtime (`crosscheck doctor`); flags are never assume
 without verification. Reviewers run in the repo root with read-only permissions;
 the engine extracts the diff deterministically.
 
-## Fixed args (gateways / wrappers)
+## Fixed args (site-specific CLI flags)
 
 Each agent accepts `bin` plus fixed leading `args` in config, injected before
-crosscheck's own flags. This makes gateways first-class (no wrapper script needed):
+crosscheck's own flags. This supports private local CLI requirements without
+requiring a wrapper script. Do not commit machine-local settings paths in shared
+repo config or docs.
 
 ```json
-{ "reviewers": { "claude": { "bin": "claude", "args": ["--settings", "~/.claude/gateway.json"] } } }
+{ "reviewers": { "claude": { "bin": "claude", "args": [] } } }
 ```
 
 A leading `~` in an arg is expanded to `$HOME`. The same `bin`/`args` are reused

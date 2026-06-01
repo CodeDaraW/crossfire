@@ -1,0 +1,62 @@
+{
+  "updated_at": "2026-06-01T15:47:00+08:00",
+  "source_of_truth": "Use this file for active work selection; use docs/IMPLEMENTATION_STATUS.md for verification detail.",
+  "features": [
+    {
+      "id": "feat-001",
+      "name": "Harness baseline and real project records",
+      "description": "Replace harness placeholders with Crosscheck-specific docs, feature state, progress, and handoff records after the repo was flattened into the root directory.",
+      "dependencies": [],
+      "status": "completed",
+      "evidence": "./init.sh passed on 2026-06-01 after extracting docs/SPEC.md and deleting historical process docs: 48 node tests passed and smoke returned SMOKE OK."
+    },
+    {
+      "id": "feat-002",
+      "name": "Review lane runtime",
+      "description": "Cross-agent read-only review/adversarial/gate flow with non-self reviewer selection, context collection, secret-path redaction, schema normalization, and deterministic arbitration.",
+      "dependencies": ["feat-001"],
+      "status": "implemented-verified-local",
+      "evidence": "./init.sh passed on 2026-06-01; tests cover non-zero reviewer exit handling, background JSON launch, in-repo state exclusion, and partial result_status."
+    },
+    {
+      "id": "feat-003",
+      "name": "Rescue/task lane runtime",
+      "description": "Read-only or write-capable delegated task execution with executor adapters, intent classification, repo mutation safety checks, touched file reporting, and session hints.",
+      "dependencies": ["feat-002"],
+      "status": "implemented-verified-local",
+      "evidence": "./init.sh passed on 2026-06-01; tests cover write rescue, read-only rescue, and already-dirty touched_files accounting."
+    },
+    {
+      "id": "feat-004",
+      "name": "Background jobs and state",
+      "description": "Background review jobs with workspace-scoped state, status/result/cancel commands, raw output files, heartbeat, and result rendering.",
+      "dependencies": ["feat-002"],
+      "status": "implemented-verified-local",
+      "evidence": "./init.sh passed on 2026-06-01; tests cover --background --json, in-repo state exclusion, and partial result_status preservation."
+    },
+    {
+      "id": "feat-005",
+      "name": "Host integration assets",
+      "description": "Portable skills and thin host shells for Codex, Cursor, and Claude Code, including Claude gate/rescue assets and Cursor command assets.",
+      "dependencies": ["feat-002", "feat-003"],
+      "status": "implemented-needs-real-host-verification",
+      "evidence": "Assets exist under skills/ and hosts/; install behavior still needs real Codex/Cursor/Claude host verification after the repo flattening commit."
+    },
+    {
+      "id": "feat-006",
+      "name": "Known review findings closure",
+      "description": "Keep regression coverage for the prior white-box/black-box findings: reviewer non-zero exit classification, touched_files for pre-dirty files, background JSON output, repo-internal state dir handling, and partial job status.",
+      "dependencies": ["feat-001"],
+      "status": "completed-local-regression",
+      "evidence": "./init.sh passed on 2026-06-01; tests now cover all five findings from the previous review pass. Real-agent E2E still needs rerun after flattening."
+    },
+    {
+      "id": "feat-007",
+      "name": "Real-agent regression matrix",
+      "description": "Keep a repeatable E2E matrix for Cursor review, Codex review, Claude review, background review, gate, and write rescue.",
+      "dependencies": ["feat-006"],
+      "status": "not-started",
+      "evidence": "Manual real-agent matrix was last run on 2026-05-30 before flattening; rerun and document it against the flattened repo."
+    }
+  ]
+}

@@ -6,7 +6,7 @@ export const DEFAULT_CONFIG = {
   reviewers: {
     default: "non-self-available",
     // `args` are fixed leading arguments injected before crosscheck's own flags,
-    // e.g. claude.args = ["--settings", "~/.claude/gateway.json"] for a gateway.
+    // for private site-specific CLI requirements.
     cursor: { bin: "cursor-agent", args: [], model: null, timeout_ms: 600000 },
     claude: { bin: "claude", args: [], model: null, timeout_ms: 600000 },
     codex: { bin: "codex", args: [], model: null, timeout_ms: 600000 },

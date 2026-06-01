@@ -7,7 +7,7 @@ import { buildExecutors } from "../src/executors/registry.mjs";
 
 const config = {
   reviewers: {
-    claude: { bin: "claude", args: ["--settings", "~/.claude/gateway.json"] },
+    claude: { bin: "claude", args: ["--config", "~/agent-config.json"] },
     codex: { bin: "codex", args: ["--config", "key=val"] },
     cursor: { bin: "cursor-agent", args: ["--foo"] },
   },
@@ -17,7 +17,7 @@ const env = { HOME: "/home/u" };
 test("claude reviewer prepends fixed args (with ~ expansion) before -p", () => {
   const a = createClaudeAdapter(config, env);
   const inv = a.buildInvocation({ prompt: "x", repoRoot: "/r", caps: { permission_mode: true } });
-  assert.deepEqual(inv.args.slice(0, 3), ["--settings", "/home/u/.claude/gateway.json", "-p"]);
+  assert.deepEqual(inv.args.slice(0, 3), ["--config", "/home/u/agent-config.json", "-p"]);
 });
 
 test("codex reviewer prepends fixed args before exec", () => {
@@ -37,5 +37,5 @@ test("executors also inject fixed args", () => {
   const execs = buildExecutors(config, env);
   const claude = execs.find((e) => e.name === "claude");
   const inv = claude.buildTaskInvocation({ prompt: "x", repoRoot: "/r", write: true });
-  assert.deepEqual(inv.args.slice(0, 3), ["--settings", "/home/u/.claude/gateway.json", "-p"]);
+  assert.deepEqual(inv.args.slice(0, 3), ["--config", "/home/u/agent-config.json", "-p"]);
 });

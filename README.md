@@ -66,4 +66,5 @@ npm test          # node --test
 npm run smoke     # end-to-end with fake agents (no real CLI calls)
 ```
 
-The full design lives in `../docs/plan-final.md`.
+The current product and architecture docs live in `docs/PRODUCT.md`,
+`docs/ARCHITECTURE.md`, and `docs/SPEC.md`.
