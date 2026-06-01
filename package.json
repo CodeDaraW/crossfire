@@ -4,7 +4,7 @@
   "description": "Cross-agent code review / rescue system for Codex, Cursor, and Claude Code.",
   "type": "module",
   "bin": {
-    "crossfire": "bin/crossfire.mjs"
+    "crossfire": "bin/crossfire"
   },
   "exports": {
     ".": "./src/cli/main.mjs"
@@ -15,7 +15,7 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "smoke": "node scripts/smoke.mjs",
-    "crossfire": "node bin/crossfire.mjs"
+    "crossfire": "bin/crossfire"
   },
   "files": [
     "bin",

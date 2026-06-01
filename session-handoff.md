@@ -22,6 +22,7 @@
 - [x] Aligned license metadata with `openai/codex-plugin-cc` using Apache-2.0 and added acknowledgements to both READMEs.
 - [x] Reframed README usage around coding-agent skill/command UX, with CLI documented as the runtime/debug layer.
 - [x] Renamed the project surface to Crossfire across package/bin, host commands, skills, config/state paths, environment variables, docs, and tests.
+- [x] Added user-facing `bin/crossfire` wrapper coverage to smoke verification while keeping internal JS re-entry paths deterministic.
 
 ## Verification Evidence
 
@@ -33,6 +34,8 @@
 | License/acknowledgement baseline | `./init.sh` | passed | 2026-06-01 16:05 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
 | Agent-first README baseline | `./init.sh` | passed | 2026-06-01 16:33 Asia/Shanghai; final README pass; 48 node tests passed; smoke returned `SMOKE OK`. |
 | Crossfire rename baseline | `./init.sh` | passed | 2026-06-01 21:40 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
+| Executable wrapper coverage baseline | `./init.sh` | passed | 2026-06-01 22:16 Asia/Shanghai; 48 node tests passed; smoke exercised `bin/crossfire` and returned `SMOKE OK`. |
+| Codex setup probe | `crossfire setup --self codex` | passed | 2026-06-01 22:16 Asia/Shanghai; reviewers available: `cursor, claude`. |
 | Rename residual scan | `rg --no-ignore` + `find` | passed | No old project name remained outside `.git`, `node_modules`, and `.agents`. |
 
 ## Files Changed
@@ -47,6 +50,7 @@
 - `LICENSE`
 - `package.json`
 - `package-lock.json`
+- `bin/crossfire`
 - `bin/crossfire.mjs`
 - `hosts/claude/commands/crossfire-*.md`
 - `hosts/claude/agents/crossfire-rescue.md`

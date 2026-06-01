@@ -14,6 +14,8 @@ import { loadConfig } from "./config.mjs";
 import { detectAll } from "../reviewers/registry.mjs";
 import { runReviewJob } from "./review-runner.mjs";
 
+// Workers are internal Node re-entry. Use the current process executable and the
+// JS entrypoint instead of the shell wrapper so jobs run with the same runtime.
 const BIN = fileURLToPath(new URL("../../bin/crossfire.mjs", import.meta.url));
 
 function nowIso() {

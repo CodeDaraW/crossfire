@@ -6,7 +6,7 @@ import { detectHostTargets } from "./detect-hosts.mjs";
 import { atomicWriteJson, readJson } from "../runtime/state.mjs";
 
 const PKG_ROOT = fileURLToPath(new URL("../../", import.meta.url));
-const BIN = join(PKG_ROOT, "bin", "crossfire.mjs");
+const BIN = join(PKG_ROOT, "bin", "crossfire");
 const SKILL_SRC = join(PKG_ROOT, "skills", "crossfire");
 
 function manifestPath(env) {

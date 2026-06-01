@@ -1,6 +1,6 @@
 # Crossfire Implementation Status
 
-Last updated: 2026-06-01 15:31 Asia/Shanghai
+Last updated: 2026-06-01 22:16 Asia/Shanghai
 
 ## Current Shape
 
@@ -18,7 +18,8 @@ Main implementation directories:
 
 ## Implemented
 
-- Node CLI entrypoint: `bin/crossfire.mjs`
+- User-facing CLI wrapper: `bin/crossfire`
+- Node CLI entrypoint: `bin/crossfire.mjs` for internal Node re-entry
 - Commands: `doctor`, `setup`, `review`, `adversarial-review`, `rescue`, `task`, `gate`, `status`, `result`, `cancel`, `install`, `uninstall`
 - Reviewer adapters: Cursor, Claude, Codex
 - Executor adapters: Cursor, Claude, Codex
@@ -31,7 +32,7 @@ Main implementation directories:
 - Background job state and raw output files
 - Portable skills and thin host assets
 - Unit and integration tests with fake agent CLIs
-- Smoke script with fake agents
+- Smoke script with fake agents that exercises the user-facing `bin/crossfire` wrapper
 
 ## Current Local Verification
 
@@ -45,7 +46,7 @@ Result:
 
 - Node runtime: bundled Codex Node `v24.14.0`
 - Unit/integration tests: 48 passed, 0 failed
-- Smoke tests: `SMOKE OK`
+- Smoke tests: `SMOKE OK`, via `bin/crossfire`
 
 The harness fallback path is intentional: this non-interactive shell does not expose `node`/`npm`, so `init.sh` uses the bundled Node runtime and prepends it to `PATH` for fake-agent shebangs.
 
@@ -54,7 +55,7 @@ The harness fallback path is intentional: this non-interactive shell does not ex
 From the 2026-05-30 white-box and black-box pass before the repo flattening:
 
 - `node --test tests/*.test.mjs`: 42 tests passed
-- `node scripts/smoke.mjs`: passed
+- `node scripts/smoke.mjs`: passed; this smoke path now invokes `bin/crossfire`
 - `crossfire --help` and `crossfire --version`: passed
 - Branch and commit review with tracked `.env`: secret content did not leak; `omitted_files` recorded `.env`
 - Real Cursor review: completed, schema-valid, no repo mutation
@@ -138,6 +139,18 @@ Current regression evidence:
 2. Verify `scripts/install.mjs` host install/uninstall behavior after flattening.
 3. Turn the manual real-agent matrix into a repeatable documented command set.
 4. Keep `./init.sh` green after any implementation change.
+
+## Entrypoint Notes
+
+`bin/crossfire` is the installable/user-facing executable and is what smoke
+tests exercise. It resolves symlinks, finds Node, and loads login-shell `PATH`
+by default so GUI-launched coding agents can still find CLIs installed through
+shell managers such as fnm/asdf/nvm. Set `CROSSFIRE_LOGIN_PATH=0` for
+deterministic tests or environments that must not read login-shell `PATH`.
+
+`bin/crossfire.mjs` remains the JS entrypoint. Integration tests and background
+workers may call it with `process.execPath` by design so they run with the same
+Node runtime instead of going through another shell wrapper.
 
 ## Real-Agent E2E Notes
 

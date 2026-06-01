@@ -5,7 +5,7 @@
 The project is now flattened into the repo root:
 
 ```text
-bin/                 CLI executable
+bin/                 user-facing executable wrapper plus JS entrypoint
 src/                 shared Node runtime
 hosts/               thin host integration assets
 skills/              portable skills and references
@@ -17,6 +17,12 @@ docs/                product, architecture, decisions, plans, reviews
 ## Runtime Boundary
 
 The Node CLI is the single source of behavior. Host assets must stay thin: they pass user intent and host identity to `crossfire`, then render or return the result. They should not duplicate Git context collection, reviewer selection, arbitration, state handling, or rescue logic.
+
+The installable executable is `bin/crossfire`. It is a small shell wrapper that
+finds Node and then runs `bin/crossfire.mjs`. Internal re-entry paths such as
+background workers can call `bin/crossfire.mjs` directly with `process.execPath`
+to keep the worker on the same Node runtime. Fake-agent smoke tests exercise the
+wrapper so the production executable is covered.
 
 ## Core Modules
 
@@ -134,7 +140,7 @@ and runtime flow.
 ## Verification Layers
 
 - Unit tests: `node --test tests/*.test.mjs`
-- Fake-agent smoke: `node scripts/smoke.mjs`
+- Fake-agent smoke: `node scripts/smoke.mjs` (invokes `bin/crossfire`)
 - Real-agent E2E: manual matrix using authenticated Cursor, Codex, and Claude
 - Adapter contract tests: required before declaring a CLI capability supported
 

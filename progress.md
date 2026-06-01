@@ -82,6 +82,7 @@
 - `LICENSE` - Apache-2.0 license text aligned with `openai/codex-plugin-cc`.
 - `package.json` - License metadata aligned to Apache-2.0.
 - `package-lock.json` - Root package license metadata aligned to Apache-2.0.
+- `bin/crossfire` - User-facing executable wrapper.
 - `bin/crossfire.mjs` - Renamed CLI entrypoint.
 - `hosts/claude/commands/crossfire-*.md` - Renamed Claude commands.
 - `hosts/cursor/commands/crossfire-*.md` - Renamed Cursor commands.
@@ -108,6 +109,13 @@ Latest README update:
 - Reworked usage docs around Codex skill prompts plus Claude/Cursor `crossfire-*` commands; direct CLI examples are now secondary.
 - Renamed the product surface to Crossfire, including CLI command `crossfire`, `.crossfire` config/state paths, and `CROSSFIRE_*` environment variables.
 
+Latest entrypoint update:
+
+- Added/kept `bin/crossfire` as the user-facing executable wrapper.
+- Updated `npm run crossfire` and smoke verification to exercise `bin/crossfire`.
+- Kept integration tests and background workers on `bin/crossfire.mjs` by design so internal re-entry uses the current Node runtime.
+- Documented `CROSSFIRE_LOGIN_PATH=0` as the deterministic-test opt-out for login-shell PATH loading.
+
 ## Evidence of Completion
 
 - [x] Baseline verification: `./init.sh`
@@ -128,6 +136,11 @@ Latest README update:
 - [x] Baseline after Crossfire rename: `./init.sh`
   - Result: 48 tests passed; smoke returned `SMOKE OK`.
   - Last run: 2026-06-01 21:40 Asia/Shanghai.
+- [x] Baseline after executable wrapper coverage update: `./init.sh`
+  - Result: 48 tests passed; smoke returned `SMOKE OK`.
+  - Last run: 2026-06-01 22:16 Asia/Shanghai.
+- [x] Codex host setup probe after executable wrapper coverage update
+  - Result: `crossfire setup --self codex` reported reviewers `cursor, claude`.
 - [x] Rename residual scan
   - Result: no old project name remained in tracked or ignored workspace files, excluding `.git`, `node_modules`, and `.agents`.
 - [x] Documentation reviewed for stale nested path references.

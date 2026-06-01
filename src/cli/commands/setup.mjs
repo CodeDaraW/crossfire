@@ -26,10 +26,11 @@ export async function run(ctx) {
 
   if (!git.available) next_steps.push("install git");
   for (const d of detected) {
+    const isSelf = d.name === self;
     if (!d.detect.available) {
-      next_steps.push(`install ${d.name} CLI to enable it as a reviewer/executor`);
+      if (!isSelf) next_steps.push(`install ${d.name} CLI to enable it as a reviewer/executor`);
     } else if (d.caps?.authenticated === false) {
-      next_steps.push(`authenticate ${d.name} (e.g. \`${d.detect.bin} login\` or \`status\`)`);
+      if (!isSelf) next_steps.push(`authenticate ${d.name} (e.g. \`${d.detect.bin} login\` or \`status\`)`);
     }
   }
   const reviewers = detected.filter((d) => d.detect.available && d.name !== self);

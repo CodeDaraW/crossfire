@@ -7,6 +7,8 @@ import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 
 const HERE = fileURLToPath(new URL(".", import.meta.url));
+// Keep integration tests on the JS entrypoint for deterministic process.execPath
+// execution; scripts/smoke.mjs covers the user-facing bin/crossfire wrapper.
 const BIN = join(HERE, "..", "bin", "crossfire.mjs");
 const FAKE_CLAUDE = join(HERE, "fixtures", "fake-claude.mjs");
 const FAKE_CODEX = join(HERE, "fixtures", "fake-codex.mjs");

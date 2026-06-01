@@ -1,0 +1,41 @@
+#!/bin/sh
+set -eu
+
+PRG="$0"
+while [ -h "$PRG" ]; do
+  DIR="$(CDPATH= cd -- "$(dirname -- "$PRG")" && pwd)"
+  LINK="$(readlink "$PRG")"
+  case "$LINK" in
+    /*) PRG="$LINK" ;;
+    *) PRG="$DIR/$LINK" ;;
+  esac
+done
+
+BIN_DIR="$(CDPATH= cd -- "$(dirname -- "$PRG")" && pwd)"
+NODE_BIN="${NODE_BIN:-}"
+
+# GUI coding agents often miss shell-managed PATH entries such as fnm/asdf/nvm.
+# Load the login zsh PATH by default so installed agent CLIs are visible.
+# Set CROSSFIRE_LOGIN_PATH=0 to disable this behavior for deterministic tests.
+if [ "${CROSSFIRE_LOGIN_PATH:-1}" != "0" ] && [ -x /bin/zsh ]; then
+  LOGIN_PATH="$(/bin/zsh -lic 'printf "%s" "$PATH"' 2>/dev/null || true)"
+  if [ -n "$LOGIN_PATH" ]; then
+    PATH="$LOGIN_PATH:$PATH"
+    export PATH
+  fi
+fi
+
+if [ -z "$NODE_BIN" ] && command -v node >/dev/null 2>&1; then
+  NODE_BIN="$(command -v node)"
+fi
+
+if [ -z "$NODE_BIN" ] && [ -x "$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node" ]; then
+  NODE_BIN="$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node"
+fi
+
+if [ -z "$NODE_BIN" ]; then
+  echo "crossfire: node not found. Install Node.js >= 18 or set NODE_BIN." >&2
+  exit 127
+fi
+
+exec "$NODE_BIN" "$BIN_DIR/crossfire.mjs" "$@"
