@@ -1,0 +1,29 @@
+{
+  "name": "crosscheck",
+  "version": "0.1.0",
+  "description": "Cross-agent code review / rescue system for Codex, Cursor, and Claude Code.",
+  "type": "module",
+  "bin": {
+    "crosscheck": "bin/crosscheck.mjs"
+  },
+  "exports": {
+    ".": "./src/cli/main.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "crosscheck": "node bin/crosscheck.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    "hosts",
+    "scripts"
+  ],
+  "license": "MIT",
+  "dependencies": {}
+}

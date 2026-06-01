@@ -1,0 +1,90 @@
+import { loadConfig } from "../../runtime/config.mjs";
+import { detectSelf } from "../../runtime/env.mjs";
+import { flagInt } from "../args.mjs";
+import { resolveTarget } from "../../git/target.mjs";
+import { collectContext, isEmptyContext } from "../../git/context.mjs";
+import { recommendMode } from "../../git/diff-size.mjs";
+import { detectAll, selectReviewers } from "../../reviewers/registry.mjs";
+import { runReviewJob } from "../../runtime/review-runner.mjs";
+import { stateExcludeDir } from "../../runtime/state.mjs";
+import { renderReviewText } from "../../render/text.mjs";
+
+export async function run(ctx) {
+  const { command: kind, flags, positionals, env, cwd } = ctx;
+  const config = await loadConfig(cwd, env);
+  const self = detectSelf(flags, env);
+
+  const target = await resolveTarget(flags, cwd);
+  if (target.error) {
+    process.stderr.write(`crosscheck: ${target.error}\n`);
+    return 2;
+  }
+
+  const detected = await detectAll(config, env);
+  const sel = selectReviewers({ self, flags, detected });
+  if (sel.error) {
+    process.stderr.write(`crosscheck: ${sel.error}\n`);
+    for (const w of sel.warnings) process.stderr.write(`  warning: ${w}\n`);
+    return 2;
+  }
+
+  const context = await collectContext(target, config, { excludeDir: stateExcludeDir(target.repoRoot, env) });
+  if (isEmptyContext(context) && target.mode === "working-tree") {
+    process.stdout.write("crosscheck: no uncommitted changes to review.\n");
+    return 0;
+  }
+
+  const focus = positionals.join(" ").trim();
+  const timeoutMs = flagInt(flags, "timeout-ms", config.reviewers?.cursor?.timeout_ms || 600000);
+  const jobParams = { kind, self, target, context, reviewers: sel.reviewers, warnings: sel.warnings, focus, timeoutMs, config, env };
+
+  if (flags.background) {
+    const { startBackgroundReview } = await import("../../runtime/jobs.mjs");
+    const job = await startBackgroundReview(jobParams, cwd);
+    if (flags.format === "json" || flags.json) {
+      process.stdout.write(
+        JSON.stringify(
+          {
+            job_id: job.id,
+            kind: job.kind,
+            status: job.status,
+            reviewers: job.reviewers,
+            status_command: `crosscheck status ${job.id}`,
+            result_command: `crosscheck result ${job.id}`,
+            cancel_command: `crosscheck cancel ${job.id}`,
+          },
+          null,
+          2,
+        ) + "\n",
+      );
+      return 0;
+    }
+    process.stdout.write(
+      [
+        `Crosscheck ${kind} started in background.`,
+        `Job ID: ${job.id}`,
+        `Status: crosscheck status ${job.id}`,
+        `Result: crosscheck result ${job.id}`,
+        `Cancel: crosscheck cancel ${job.id}`,
+      ].join("\n") + "\n",
+    );
+    return 0;
+  }
+
+  if (!flags.wait && recommendMode(context, config) === "background") {
+    process.stderr.write(`crosscheck: large change; consider --background. Running foreground (--wait assumed).\n`);
+  }
+
+  const result = await runReviewJob(jobParams, detected);
+
+  if (flags.format === "json" || flags.json) {
+    process.stdout.write(JSON.stringify(stripRaw(result), null, 2) + "\n");
+  } else {
+    process.stdout.write(renderReviewText(result) + "\n");
+  }
+  return 0;
+}
+
+function stripRaw(result) {
+  return { ...result, reviewers: result.reviewers.map((r) => ({ ...r, raw_output: undefined })) };
+}
