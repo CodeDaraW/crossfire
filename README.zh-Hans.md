@@ -6,7 +6,7 @@
 
 ## 安装
 
-需要：Node.js 18+、`git`、至少一个非当前 Agent 的 CLI（`cursor-Agent`、`claude` 或 `codex`）已安装并登录。
+需要：Node.js 18+、`git`、至少一个非当前 Agent 的 CLI（`cursor-agent`、`claude` 或 `codex`）已安装并登录。
 
 ```bash
 mkdir -p ~/.local/bin
