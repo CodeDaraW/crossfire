@@ -17,12 +17,20 @@
 - [x] Removed committed examples that exposed local Claude settings invocation paths.
 - [x] Extracted remaining useful process-doc details into `docs/SPEC.md`.
 - [x] Removed historical plan/review process docs after extraction.
+- [x] Added README install, project initialization, optional config, and manual test instructions.
+- [x] Reorganized README in a `codex-plugin-cc`-style structure and added `README.zh-Hans.md`.
+- [x] Aligned license metadata with `openai/codex-plugin-cc` using Apache-2.0 and added acknowledgements to both READMEs.
+- [x] Reframed README usage around coding-agent skill/command UX, with CLI documented as the runtime/debug layer.
 
 ## Verification Evidence
 
 | Check | Command | Result | Notes |
 |---|---|---|---|
 | Baseline | `./init.sh` | passed | 2026-06-01 15:47 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
+| README update baseline | `./init.sh` | passed | 2026-06-01 15:57 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
+| Bilingual README baseline | `./init.sh` | passed | 2026-06-01 16:01 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
+| License/acknowledgement baseline | `./init.sh` | passed | 2026-06-01 16:05 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
+| Agent-first README baseline | `./init.sh` | passed | 2026-06-01 16:33 Asia/Shanghai; final README pass; 48 node tests passed; smoke returned `SMOKE OK`. |
 
 ## Files Changed
 
@@ -32,6 +40,10 @@
 - `progress.md`
 - `session-handoff.md`
 - `README.md`
+- `README.zh-Hans.md`
+- `LICENSE`
+- `package.json`
+- `package-lock.json`
 - `docs/PRODUCT.md`
 - `docs/ARCHITECTURE.md`
 - `docs/SPEC.md`

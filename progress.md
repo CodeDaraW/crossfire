@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Last Updated:** 2026-06-01 15:47 Asia/Shanghai  
+**Last Updated:** 2026-06-01 16:33 Asia/Shanghai  
 **Active Feature:** feat-001 - Harness baseline and real project records  
 **Repository Shape:** Project was flattened from `crosscheck/` into the repo root. Runtime files now live at `bin/`, `src/`, `skills/`, `hosts/`, `tests/`, and `docs/`.
 
@@ -28,6 +28,10 @@
 - [x] `./init.sh` passes in the flattened repo root.
 - [x] Remaining useful details from the five historical process docs have been extracted into `docs/SPEC.md`.
 - [x] The five historical process docs have been removed.
+- [x] README now documents install, per-project initialization, optional project config, and quick manual tests.
+- [x] README has been reorganized in a `codex-plugin-cc`-style structure and `README.zh-Hans.md` has been added.
+- [x] License metadata now aligns with `openai/codex-plugin-cc` using Apache-2.0, with acknowledgements added to both READMEs.
+- [x] README now presents Crosscheck as an agent skill/command workflow first, with the CLI documented as the shared runtime/debug layer.
 
 ### What's In Progress
 
@@ -44,7 +48,7 @@
 ## Blockers / Risks
 
 - [x] The repo's default shell environment may not expose `node`/`npm`; `init.sh` now falls back to the bundled Codex Node runtime when available and exports that directory into `PATH`.
-- [ ] Historical plan files still contain superseded discussion and should not be used as the sole implementation source.
+- [x] Historical process docs have been removed after useful content was extracted into current docs.
 - [ ] Real-agent E2E uses user accounts and should run intentionally, not as part of every baseline check.
 
 ## Decisions Made
@@ -73,6 +77,10 @@
 - `progress.md` - Current continuity log.
 - `session-handoff.md` - Next-session handoff.
 - `README.md` - Correct flattened-doc links.
+- `README.zh-Hans.md` - Simplified Chinese README.
+- `LICENSE` - Apache-2.0 license text aligned with `openai/codex-plugin-cc`.
+- `package.json` - License metadata aligned to Apache-2.0.
+- `package-lock.json` - Root package license metadata aligned to Apache-2.0.
 - `docs/PRODUCT.md` - Product contract.
 - `docs/ARCHITECTURE.md` - Runtime architecture.
 - `docs/SPEC.md` - Current detailed contracts extracted from historical process docs.
@@ -83,11 +91,34 @@
 - `src/runtime/config.mjs` - Removed local Claude settings example from default config comments.
 - `tests/adapters.test.mjs` - Replaced local Claude settings fixture with a generic fixed-args fixture.
 
+Latest README update:
+
+- Added install prerequisites (`~/.local/bin` and `PATH`).
+- Documented exactly what `scripts/install.mjs` installs.
+- Added project initialization flow using `doctor` / `setup`.
+- Added quick manual review/background/rescue test commands.
+- Reorganized into What You Get, Install, First Run, Usage, Typical Flows, Configuration, Safety, FAQ.
+- Added a Simplified Chinese version with matching content.
+- Added Apache-2.0 license sections and `openai/codex-plugin-cc` acknowledgements to both READMEs.
+- Reworked usage docs around Codex skill prompts plus Claude/Cursor `crosscheck-*` commands; direct CLI examples are now secondary.
+
 ## Evidence of Completion
 
 - [x] Baseline verification: `./init.sh`
   - Result: 48 tests passed; smoke returned `SMOKE OK`.
   - Last run: 2026-06-01 15:47 Asia/Shanghai, after deleting historical process docs.
+- [x] Baseline after README install docs update: `./init.sh`
+  - Result: 48 tests passed; smoke returned `SMOKE OK`.
+  - Last run: 2026-06-01 15:57 Asia/Shanghai.
+- [x] Baseline after bilingual README rewrite: `./init.sh`
+  - Result: 48 tests passed; smoke returned `SMOKE OK`.
+  - Last run: 2026-06-01 16:01 Asia/Shanghai.
+- [x] Baseline after license/acknowledgement update: `./init.sh`
+  - Result: 48 tests passed; smoke returned `SMOKE OK`.
+  - Last run: 2026-06-01 16:05 Asia/Shanghai.
+- [x] Baseline after agent-first README rewrite: `./init.sh`
+  - Result: 48 tests passed; smoke returned `SMOKE OK`.
+  - Last run: 2026-06-01 16:33 Asia/Shanghai.
 - [x] Documentation reviewed for stale nested path references.
 
 ## Notes for Next Session
