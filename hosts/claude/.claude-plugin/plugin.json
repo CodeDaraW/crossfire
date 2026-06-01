@@ -1,5 +1,5 @@
 {
-  "name": "crosscheck",
+  "name": "crossfire",
   "description": "Cross-agent code review and rescue across Cursor, Claude Code, and Codex.",
   "version": "0.1.0",
   "commands": "./commands",

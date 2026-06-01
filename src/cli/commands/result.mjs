@@ -7,7 +7,7 @@ export async function run(ctx) {
   const { flags, positionals, env, cwd } = ctx;
   const root = await repoRoot(cwd);
   if (!root) {
-    process.stderr.write("crosscheck: not a git repository\n");
+    process.stderr.write("crossfire: not a git repository\n");
     return 2;
   }
 
@@ -16,7 +16,7 @@ export async function run(ctx) {
     const jobs = await listJobs(root, env);
     const done = jobs.find((j) => ["completed", "failed", "partial"].includes(j.status));
     if (!done) {
-      process.stderr.write("crosscheck: no finished job found\n");
+      process.stderr.write("crossfire: no finished job found\n");
       return 2;
     }
     id = done.id;
@@ -24,17 +24,17 @@ export async function run(ctx) {
 
   const job = await readJob(root, id, env);
   if (!job) {
-    process.stderr.write(`crosscheck: job not found: ${id}\n`);
+    process.stderr.write(`crossfire: job not found: ${id}\n`);
     return 2;
   }
   if (["queued", "running"].includes(job.status)) {
-    process.stdout.write(`Job ${id} is still ${job.status}. Try: crosscheck status ${id} --wait\n`);
+    process.stdout.write(`Job ${id} is still ${job.status}. Try: crossfire status ${id} --wait\n`);
     return 0;
   }
 
   const result = await readJson(jobResultFile(root, id, env));
   if (!result) {
-    process.stderr.write(`crosscheck: no result available for ${id} (status ${job.status})\n`);
+    process.stderr.write(`crossfire: no result available for ${id} (status ${job.status})\n`);
     if (job.errorMessage) process.stderr.write(`  ${job.errorMessage}\n`);
     return 1;
   }

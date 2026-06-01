@@ -9,7 +9,7 @@ function findingBlock(f) {
 export function renderReviewText(result) {
   const lines = [];
   const a = result.arbitration || {};
-  lines.push(`# Crosscheck ${result.kind}`);
+  lines.push(`# Crossfire ${result.kind}`);
   lines.push(`Target: ${result.target.label} (${result.target.mode})`);
   lines.push(`Reviewers: ${result.reviewers.map((r) => r.name).join(", ") || "(none)"}`);
   lines.push(`Verdict: ${a.verdict || result.status}`);

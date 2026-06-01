@@ -1,5 +1,5 @@
 // Shared logic for fake agent CLIs used in tests and smoke runs.
-// Each fake emulates the subset of CLI behavior crosscheck adapters rely on:
+// Each fake emulates the subset of CLI behavior crossfire adapters rely on:
 //   --help        -> prints flag names so capability probing succeeds
 //   status        -> reports "Logged in" (cursor auth probe)
 //   exec --help    -> codex exec help

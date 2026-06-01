@@ -6,11 +6,11 @@ import { detectHostTargets } from "./detect-hosts.mjs";
 import { atomicWriteJson, readJson } from "../runtime/state.mjs";
 
 const PKG_ROOT = fileURLToPath(new URL("../../", import.meta.url));
-const BIN = join(PKG_ROOT, "bin", "crosscheck.mjs");
-const SKILL_SRC = join(PKG_ROOT, "skills", "crosscheck");
+const BIN = join(PKG_ROOT, "bin", "crossfire.mjs");
+const SKILL_SRC = join(PKG_ROOT, "skills", "crossfire");
 
 function manifestPath(env) {
-  return join(env.CROSSCHECK_CONFIG_HOME || homedir(), ".crosscheck", "install-manifest.json");
+  return join(env.CROSSFIRE_CONFIG_HOME || homedir(), ".crossfire", "install-manifest.json");
 }
 
 async function ensureDir(d) {

@@ -1,8 +1,8 @@
 # AGENTS.md
 
-Project harness for reliable agent-assisted development in Crosscheck.
+Project harness for reliable agent-assisted development in Crossfire.
 
-Crosscheck is a Node CLI plus host integration assets for cross-agent code
+Crossfire is a Node CLI plus host integration assets for cross-agent code
 review and rescue across Codex, Cursor, and Claude Code. The authoritative
 product direction is the current implementation plus the docs listed below.
 Earlier plan/review process docs have been extracted into these current docs.

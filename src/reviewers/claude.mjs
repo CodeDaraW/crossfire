@@ -2,7 +2,7 @@ import { which, runProcess } from "../runtime/process.mjs";
 import { expandHomeArgs } from "../runtime/env.mjs";
 
 export function createClaudeAdapter(config, env = process.env) {
-  const bin = env.CROSSCHECK_CLAUDE_BIN || config?.reviewers?.claude?.bin || "claude";
+  const bin = env.CROSSFIRE_CLAUDE_BIN || config?.reviewers?.claude?.bin || "claude";
   const fixedArgs = expandHomeArgs(config?.reviewers?.claude?.args, env);
   return {
     name: "claude",

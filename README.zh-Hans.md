@@ -1,4 +1,4 @@
-# Crosscheck
+# Crossfire
 
 [English](README.md)
 
@@ -14,7 +14,7 @@ node scripts/install.mjs
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
-请把 PATH 变更持久写入 shell 或 Coding Agent 的启动环境，宿主命令会直接按名称调用 `crosscheck`。
+请把 PATH 变更持久写入 shell 或 Coding Agent 的启动环境，宿主命令会直接按名称调用 `crossfire`。
 
 安装器只会向已检测到的 Agent home 目录写入符号链接。如果某个 host 被跳过，先打开一次对应 Agent，让它创建 home 目录，然后重新安装。
 如果 Agent 未自动识别新 skill/command，重启 Agent 即可。
@@ -25,37 +25,37 @@ export PATH="$HOME/.local/bin:$PATH"
 
 **Codex:**
 ```
-Use crosscheck to review my current changes.
+Use crossfire to review my current changes.
 ```
 
 **Claude Code:**
 ```
-/crosscheck-review
+/crossfire-review
 ```
 
 **Cursor:**
 ```
-crosscheck-review
+crossfire-review
 ```
 
 首次使用？先检查环境：
 
-- **Codex:** `Use crosscheck to check setup for this repo`
-- **Claude:** `/crosscheck-setup`
-- **Cursor:** `crosscheck-setup`
+- **Codex:** `Use crossfire to check setup for this repo`
+- **Claude:** `/crossfire-setup`
+- **Cursor:** `crossfire-setup`
 
 ## 命令速查
 
 | 操作 | Codex | Claude Code | Cursor |
 |------|-------|-------------|--------|
-| 检查环境 | `Use crosscheck to check setup` | `/crosscheck-setup` | `crosscheck-setup` |
-| 审查 | `Use crosscheck to review` | `/crosscheck-review` | `crosscheck-review` |
-| adversarial review | `Use crosscheck adversarial review` | `/crosscheck-adversarial-review` | `crosscheck-adversarial-review` |
-| rescue（只读） | `Use crosscheck rescue in read-only mode` | `/crosscheck-rescue --read-only` | `crosscheck-rescue --read-only` |
-| rescue（可写） | `Use crosscheck rescue with write` | `/crosscheck-rescue --write` | `crosscheck-rescue --write` |
-| 状态 | `Use crosscheck status` | `/crosscheck-status` | `crosscheck-status` |
-| 结果 | `Use crosscheck result` | `/crosscheck-result <id>` | `crosscheck-result <id>` |
-| 取消 | `Use crosscheck cancel` | `/crosscheck-cancel <id>` | `crosscheck-cancel <id>` |
+| 检查环境 | `Use crossfire to check setup` | `/crossfire-setup` | `crossfire-setup` |
+| 审查 | `Use crossfire to review` | `/crossfire-review` | `crossfire-review` |
+| adversarial review | `Use crossfire adversarial review` | `/crossfire-adversarial-review` | `crossfire-adversarial-review` |
+| rescue（只读） | `Use crossfire rescue in read-only mode` | `/crossfire-rescue --read-only` | `crossfire-rescue --read-only` |
+| rescue（可写） | `Use crossfire rescue with write` | `/crossfire-rescue --write` | `crossfire-rescue --write` |
+| 状态 | `Use crossfire status` | `/crossfire-status` | `crossfire-status` |
+| 结果 | `Use crossfire result` | `/crossfire-result <id>` | `crossfire-result <id>` |
+| 取消 | `Use crossfire cancel` | `/crossfire-cancel <id>` | `crossfire-cancel <id>` |
 
 `review` 命令只读，`rescue --write` 是唯一可委派写操作的路径。
 
@@ -64,19 +64,19 @@ crosscheck-review
 调试或自动化时直接调用：
 
 ```bash
-crosscheck review --self codex --wait
-crosscheck adversarial-review --self codex "focus on rollback risk"
-crosscheck rescue --self codex --write --only claude "fix the failing test"
-crosscheck status <job-id> --wait
-crosscheck result <job-id>
-crosscheck doctor --self codex
+crossfire review --self codex --wait
+crossfire adversarial-review --self codex "focus on rollback risk"
+crossfire rescue --self codex --write --only claude "fix the failing test"
+crossfire status <job-id> --wait
+crossfire result <job-id>
+crossfire doctor --self codex
 ```
 
 直接调用 CLI 时，`--self` 表示当前宿主。要指定目标 Agent，用 `--only` 或 `--executor`。
 
 ## 配置
 
-一般无需配置，但如果需要自定义二进制路径或超时，添加 `.crosscheck/config.json`：
+一般无需配置，但如果需要自定义二进制路径或超时，添加 `.crossfire/config.json`：
 
 ```json
 {
@@ -99,7 +99,7 @@ crosscheck doctor --self codex
 ## FAQ
 
 **需要给每个 Agent 单独账号吗？**   
-不需要。Crosscheck 使用 CLI 已有的登录状态。
+不需要。Crossfire 使用 CLI 已有的登录状态。
 
 
 **会安装到每个项目吗？**   
@@ -109,7 +109,7 @@ crosscheck doctor --self codex
 不能。委派写操作通过宿主命令或 skill 使用 `rescue --write`。
 
 **任务状态存哪？**  
-`~/.crosscheck/state/<repo-slug>-<hash>/`
+`~/.crossfire/state/<repo-slug>-<hash>/`
 
 ## 致谢
 

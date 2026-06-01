@@ -13,7 +13,7 @@ export async function run(ctx) {
 
   // Gate enable/disable persists to user config.
   if (flags["enable-gate"] || flags["disable-gate"]) {
-    const path = join(env.CROSSCHECK_CONFIG_HOME || homedir(), ".crosscheck", "config.json");
+    const path = join(env.CROSSFIRE_CONFIG_HOME || homedir(), ".crossfire", "config.json");
     const cfg = (await readJson(path)) || {};
     cfg.gate = { ...(cfg.gate || {}), enabled: Boolean(flags["enable-gate"]) };
     await atomicWriteJson(path, cfg);
@@ -55,7 +55,7 @@ export async function run(ctx) {
     process.stdout.write(JSON.stringify(report, null, 2) + "\n");
     return report.ready ? 0 : 1;
   }
-  process.stdout.write(`crosscheck setup\nself: ${self}\nready: ${report.ready}\n`);
+  process.stdout.write(`crossfire setup\nself: ${self}\nready: ${report.ready}\n`);
   process.stdout.write(`reviewers available: ${reviewers.map((r) => r.name).join(", ") || "(none)"}\n`);
   if (next_steps.length) {
     process.stdout.write("next steps:\n");

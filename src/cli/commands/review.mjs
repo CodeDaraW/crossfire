@@ -16,21 +16,21 @@ export async function run(ctx) {
 
   const target = await resolveTarget(flags, cwd);
   if (target.error) {
-    process.stderr.write(`crosscheck: ${target.error}\n`);
+    process.stderr.write(`crossfire: ${target.error}\n`);
     return 2;
   }
 
   const detected = await detectAll(config, env);
   const sel = selectReviewers({ self, flags, detected });
   if (sel.error) {
-    process.stderr.write(`crosscheck: ${sel.error}\n`);
+    process.stderr.write(`crossfire: ${sel.error}\n`);
     for (const w of sel.warnings) process.stderr.write(`  warning: ${w}\n`);
     return 2;
   }
 
   const context = await collectContext(target, config, { excludeDir: stateExcludeDir(target.repoRoot, env) });
   if (isEmptyContext(context) && target.mode === "working-tree") {
-    process.stdout.write("crosscheck: no uncommitted changes to review.\n");
+    process.stdout.write("crossfire: no uncommitted changes to review.\n");
     return 0;
   }
 
@@ -49,9 +49,9 @@ export async function run(ctx) {
             kind: job.kind,
             status: job.status,
             reviewers: job.reviewers,
-            status_command: `crosscheck status ${job.id}`,
-            result_command: `crosscheck result ${job.id}`,
-            cancel_command: `crosscheck cancel ${job.id}`,
+            status_command: `crossfire status ${job.id}`,
+            result_command: `crossfire result ${job.id}`,
+            cancel_command: `crossfire cancel ${job.id}`,
           },
           null,
           2,
@@ -61,18 +61,18 @@ export async function run(ctx) {
     }
     process.stdout.write(
       [
-        `Crosscheck ${kind} started in background.`,
+        `Crossfire ${kind} started in background.`,
         `Job ID: ${job.id}`,
-        `Status: crosscheck status ${job.id}`,
-        `Result: crosscheck result ${job.id}`,
-        `Cancel: crosscheck cancel ${job.id}`,
+        `Status: crossfire status ${job.id}`,
+        `Result: crossfire result ${job.id}`,
+        `Cancel: crossfire cancel ${job.id}`,
       ].join("\n") + "\n",
     );
     return 0;
   }
 
   if (!flags.wait && recommendMode(context, config) === "background") {
-    process.stderr.write(`crosscheck: large change; consider --background. Running foreground (--wait assumed).\n`);
+    process.stderr.write(`crossfire: large change; consider --background. Running foreground (--wait assumed).\n`);
   }
 
   const result = await runReviewJob(jobParams, detected);

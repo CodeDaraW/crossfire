@@ -6,20 +6,20 @@ import { createHash } from "node:crypto";
 
 /** Resolve the stable state root for a repo. Never uses $TMPDIR. */
 export function stateRoot(repoRootPath, env = process.env) {
-  const base = env.CROSSCHECK_DATA_DIR || join(homedir(), ".crosscheck");
+  const base = env.CROSSFIRE_DATA_DIR || join(homedir(), ".crossfire");
   const slug = (repoRootPath ? repoRootPath.split("/").filter(Boolean).pop() : "no-repo") || "repo";
   const hash = createHash("sha1").update(repoRootPath || "no-repo").digest("hex").slice(0, 10);
   return join(base, "state", `${slug}-${hash}`);
 }
 
 /**
- * If the crosscheck data dir lives inside the repo, return the repo-relative
+ * If the crossfire data dir lives inside the repo, return the repo-relative
  * top-level segment to exclude from review change-detection (e.g. ".state").
  * Realpath-normalizes both sides so macOS /var vs /private/var symlinks match.
  */
 export function stateExcludeDir(repoRootPath, env = process.env) {
   if (!repoRootPath) return null;
-  const dataDir = env.CROSSCHECK_DATA_DIR || join(homedir(), ".crosscheck");
+  const dataDir = env.CROSSFIRE_DATA_DIR || join(homedir(), ".crossfire");
   // Realpath the deepest existing ancestor, then re-append the missing tail, so
   // not-yet-created dirs still normalize symlinks (e.g. /var -> /private/var).
   const real = (p) => {

@@ -1,4 +1,4 @@
-# Crosscheck Architecture
+# Crossfire Architecture
 
 ## Repository Layout
 
@@ -16,7 +16,7 @@ docs/                product, architecture, decisions, plans, reviews
 
 ## Runtime Boundary
 
-The Node CLI is the single source of behavior. Host assets must stay thin: they pass user intent and host identity to `crosscheck`, then render or return the result. They should not duplicate Git context collection, reviewer selection, arbitration, state handling, or rescue logic.
+The Node CLI is the single source of behavior. Host assets must stay thin: they pass user intent and host identity to `crossfire`, then render or return the result. They should not duplicate Git context collection, reviewer selection, arbitration, state handling, or rescue logic.
 
 ## Core Modules
 
@@ -35,7 +35,7 @@ The Node CLI is the single source of behavior. Host assets must stay thin: they 
 
 ```text
 host command / skill
-  -> crosscheck review
+  -> crossfire review
   -> load config and detect self
   -> resolve Git target
   -> collect deterministic context
@@ -51,7 +51,7 @@ host command / skill
 Important constraints:
 
 - Review is read-only even when the reviewer is a full coding agent.
-- Context is collected by Crosscheck, not left entirely to reviewer exploration.
+- Context is collected by Crossfire, not left entirely to reviewer exploration.
 - `repo_changed_during_review` must be represented as a safety issue.
 - Raw reviewer output is preserved for background jobs.
 
@@ -59,7 +59,7 @@ Important constraints:
 
 ```text
 host command / skill
-  -> crosscheck rescue or task
+  -> crossfire rescue or task
   -> load config and detect self
   -> select executor
   -> classify read-only/write intent
@@ -81,7 +81,7 @@ coverage (see `docs/IMPLEMENTATION_STATUS.md` and `docs/DECISIONS.md` D-012).
 State root:
 
 ```text
-${CROSSCHECK_DATA_DIR:-$HOME/.crosscheck}/state/<repo-slug>-<hash>/
+${CROSSFIRE_DATA_DIR:-$HOME/.crossfire}/state/<repo-slug>-<hash>/
   jobs/
     <job-id>.json
     <job-id>.result.json
@@ -102,8 +102,8 @@ Default config lives in `src/runtime/config.mjs`.
 Config merge order:
 
 1. defaults
-2. user config at `${CROSSCHECK_CONFIG_HOME:-$HOME}/.crosscheck/config.json`
-3. repo config at `.crosscheck/config.json`
+2. user config at `${CROSSFIRE_CONFIG_HOME:-$HOME}/.crossfire/config.json`
+3. repo config at `.crossfire/config.json`
 4. command flags and environment handled by callers/adapters
 
 Claude invocation:
@@ -116,10 +116,10 @@ The adapter path expands `~` in fixed args and injects those args into review/ta
 
 ## Host Assets
 
-- `skills/crosscheck/`: main portable skill.
-- `skills/crosscheck-runtime/`: runtime usage guidance.
-- `skills/crosscheck-result-handling/`: how to handle and present results.
-- `skills/crosscheck-prompting/`: prompt patterns and anti-patterns.
+- `skills/crossfire/`: main portable skill.
+- `skills/crossfire-runtime/`: runtime usage guidance.
+- `skills/crossfire-result-handling/`: how to handle and present results.
+- `skills/crossfire-prompting/`: prompt patterns and anti-patterns.
 - `hosts/claude/`: Claude slash commands, Stop hook, and rescue agent.
 - `hosts/cursor/`: Cursor command assets.
 

@@ -15,7 +15,7 @@ const COMMANDS = {
   uninstall: () => import("./commands/install.mjs"),
 };
 
-const HELP = `crosscheck <command> [options] [focus...]
+const HELP = `crossfire <command> [options] [focus...]
 
 Review lane (read-only):
   review                 cross-review uncommitted / branch / commit changes
@@ -67,7 +67,7 @@ export async function main(argv) {
 
   const loader = COMMANDS[command];
   if (!loader) {
-    process.stderr.write(`crosscheck: unknown command '${command}'\n\n${HELP}`);
+    process.stderr.write(`crossfire: unknown command '${command}'\n\n${HELP}`);
     return 2;
   }
 

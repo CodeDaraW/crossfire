@@ -78,7 +78,7 @@ export function selectReviewers({ self, flags, detected }) {
       warnings,
       error:
         availableNames.length === 0
-          ? "no reviewer CLI available; run `crosscheck doctor`"
+          ? "no reviewer CLI available; run `crossfire doctor`"
           : `no non-self reviewer available (self=${self}, available=${availableNames.join(",") || "none"}); use --allow-self or --only to override`,
     };
   }

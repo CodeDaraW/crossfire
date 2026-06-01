@@ -1,9 +1,9 @@
 ---
-name: crosscheck-prompting
-description: How to tighten a user's rescue/task request into a better delegation prompt for crosscheck. Use only to sharpen the request text, not to solve the task in the host agent.
+name: crossfire-prompting
+description: How to tighten a user's rescue/task request into a better delegation prompt for crossfire. Use only to sharpen the request text, not to solve the task in the host agent.
 ---
 
-# crosscheck-prompting
+# crossfire-prompting
 
 Use this only to convert a vague user request into a crisp delegation prompt.
 

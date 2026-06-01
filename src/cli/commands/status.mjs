@@ -8,7 +8,7 @@ export async function run(ctx) {
   const { flags, positionals, env, cwd } = ctx;
   const root = await repoRoot(cwd);
   if (!root) {
-    process.stderr.write("crosscheck: not a git repository\n");
+    process.stderr.write("crossfire: not a git repository\n");
     return 2;
   }
   const id = positionals[0];
@@ -16,7 +16,7 @@ export async function run(ctx) {
   if (id) {
     let job = reconcile(await readJob(root, id, env));
     if (!job) {
-      process.stderr.write(`crosscheck: job not found: ${id}\n`);
+      process.stderr.write(`crossfire: job not found: ${id}\n`);
       return 2;
     }
     if (flags.wait) {
@@ -42,7 +42,7 @@ export async function run(ctx) {
     return 0;
   }
   if (!jobs.length) {
-    process.stdout.write("No crosscheck jobs for this workspace.\n");
+    process.stdout.write("No crossfire jobs for this workspace.\n");
     return 0;
   }
   const rows = [["Job ID", "Kind", "Reviewers", "Status", "Phase", "Summary"]];
@@ -68,7 +68,7 @@ function renderOne(j) {
     `created: ${j.createdAt}  completed: ${j.completedAt || "-"}`,
     j.errorMessage ? `error: ${j.errorMessage}` : "",
     j.summary ? `summary: ${j.summary}` : "",
-    ["completed", "failed", "partial"].includes(j.status) ? `result: crosscheck result ${j.id}` : "",
+    ["completed", "failed", "partial"].includes(j.status) ? `result: crossfire result ${j.id}` : "",
   ]
     .filter(Boolean)
     .join("\n");

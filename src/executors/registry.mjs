@@ -45,7 +45,7 @@ export function buildExecutors(config, env = process.env) {
   const r = config?.reviewers || {};
   return [
     makeExecutor("cursor", r.cursor?.bin || "cursor-agent", expandHomeArgs(r.cursor?.args, env), cursorTask),
-    makeExecutor("claude", env.CROSSCHECK_CLAUDE_BIN || r.claude?.bin || "claude", expandHomeArgs(r.claude?.args, env), claudeTask),
+    makeExecutor("claude", env.CROSSFIRE_CLAUDE_BIN || r.claude?.bin || "claude", expandHomeArgs(r.claude?.args, env), claudeTask),
     makeExecutor("codex", r.codex?.bin || "codex", expandHomeArgs(r.codex?.args, env), codexTask),
   ];
 }

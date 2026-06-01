@@ -14,7 +14,7 @@ import { loadConfig } from "./config.mjs";
 import { detectAll } from "../reviewers/registry.mjs";
 import { runReviewJob } from "./review-runner.mjs";
 
-const BIN = fileURLToPath(new URL("../../bin/crosscheck.mjs", import.meta.url));
+const BIN = fileURLToPath(new URL("../../bin/crossfire.mjs", import.meta.url));
 
 function nowIso() {
   return new Date().toISOString();
@@ -68,13 +68,13 @@ export async function startBackgroundReview(jobParams, cwd) {
 export async function runWorker(ctx) {
   const [repoRoot, id] = ctx.positionals;
   if (!repoRoot || !id) {
-    process.stderr.write("crosscheck __worker: missing repoRoot/id\n");
+    process.stderr.write("crossfire __worker: missing repoRoot/id\n");
     return 2;
   }
   const env = ctx.env;
   const job = await readJob(repoRoot, id, env);
   if (!job || !job._spec) {
-    process.stderr.write("crosscheck __worker: job not found\n");
+    process.stderr.write("crossfire __worker: job not found\n");
     return 2;
   }
 

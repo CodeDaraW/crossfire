@@ -33,8 +33,8 @@ export async function run(ctx) {
   }
   process.stdout.write(
     `\nNotes:\n` +
-      `  - Ensure the 'crosscheck' bin dir is on PATH (e.g. ~/.local/bin).\n` +
-      `  - Claude stop-gate hook is opt-in: enable with 'crosscheck setup --enable-gate' and\n` +
+      `  - Ensure the 'crossfire' bin dir is on PATH (e.g. ~/.local/bin).\n` +
+      `  - Claude stop-gate hook is opt-in: enable with 'crossfire setup --enable-gate' and\n` +
       `    add hosts/claude/hooks/hooks.json to your Claude hooks config.\n`,
   );
   return 0;

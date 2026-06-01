@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "crosscheck gate --self claude --previous-turn-file \"$CLAUDE_PREVIOUS_TURN_FILE\"",
+            "command": "crossfire gate --self claude --previous-turn-file \"$CLAUDE_PREVIOUS_TURN_FILE\"",
             "comment": "Read-only stop-time review gate. Exit 2 = BLOCK. Disabled unless gate.enabled."
           }
         ]

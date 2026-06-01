@@ -11,13 +11,13 @@ export function expandHomeArgs(args = [], env = process.env) {
 }
 
 /**
- * Detect which agent is hosting crosscheck right now.
+ * Detect which agent is hosting crossfire right now.
  * Priority: --self flag > explicit env > unknown.
  * Host command templates are expected to pass --self explicitly.
  */
 export function detectSelf(flags = {}, env = process.env) {
   if (flags.self && HOSTS.includes(flags.self)) return flags.self;
-  if (env.CROSSCHECK_SELF && HOSTS.includes(env.CROSSCHECK_SELF)) return env.CROSSCHECK_SELF;
+  if (env.CROSSFIRE_SELF && HOSTS.includes(env.CROSSFIRE_SELF)) return env.CROSSFIRE_SELF;
   if (env.CURSOR_AGENT) return "cursor";
   if (env.CLAUDECODE) return "claude";
   if (env.CODEX_SANDBOX || env.CODEX_HOME || env.CODEX_AGENT) return "codex";
@@ -25,7 +25,7 @@ export function detectSelf(flags = {}, env = process.env) {
 }
 
 export function isChildInvocation(env = process.env) {
-  return env.CROSSCHECK_CHILD === "1";
+  return env.CROSSFIRE_CHILD === "1";
 }
 
 // Environment variables that should never leak into spawned reviewer/executor
@@ -53,7 +53,7 @@ const KEEP_ALLOWLIST = new Set([
 /**
  * Produce a scrubbed copy of env for a child agent process.
  * Drops obviously-sensitive variables that are not on the auth allowlist,
- * and injects CROSSCHECK_CHILD=1 to prevent recursive gate triggering.
+ * and injects CROSSFIRE_CHILD=1 to prevent recursive gate triggering.
  */
 export function scrubEnv(env = process.env, extra = {}) {
   const out = {};
@@ -66,6 +66,6 @@ export function scrubEnv(env = process.env, extra = {}) {
     if (SENSITIVE_PATTERNS.some((re) => re.test(k))) continue;
     out[k] = v;
   }
-  out.CROSSCHECK_CHILD = "1";
+  out.CROSSFIRE_CHILD = "1";
   return { ...out, ...extra };
 }

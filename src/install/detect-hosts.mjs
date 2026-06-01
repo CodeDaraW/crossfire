@@ -20,19 +20,19 @@ export async function detectHostTargets(env = process.env) {
   const targets = [];
 
   const codexSkills = join(home, ".codex", "skills");
-  targets.push({ host: "codex", kind: "skill", dir: join(codexSkills, "crosscheck"), parent: codexSkills, present: await exists(join(home, ".codex")) });
+  targets.push({ host: "codex", kind: "skill", dir: join(codexSkills, "crossfire"), parent: codexSkills, present: await exists(join(home, ".codex")) });
 
   const claudeHome = join(home, ".claude");
-  targets.push({ host: "claude", kind: "skill", dir: join(claudeHome, "skills", "crosscheck"), parent: join(claudeHome, "skills"), present: await exists(claudeHome) });
+  targets.push({ host: "claude", kind: "skill", dir: join(claudeHome, "skills", "crossfire"), parent: join(claudeHome, "skills"), present: await exists(claudeHome) });
   targets.push({ host: "claude", kind: "commands", dir: join(claudeHome, "commands"), parent: claudeHome, present: await exists(claudeHome), source: "hosts/claude/commands", merge: true });
   targets.push({ host: "claude", kind: "agents", dir: join(claudeHome, "agents"), parent: claudeHome, present: await exists(claudeHome), source: "hosts/claude/agents", merge: true });
 
   const cursorHome = join(home, ".cursor");
-  targets.push({ host: "cursor", kind: "skill", dir: join(cursorHome, "skills", "crosscheck"), parent: join(cursorHome, "skills"), present: await exists(cursorHome) });
+  targets.push({ host: "cursor", kind: "skill", dir: join(cursorHome, "skills", "crossfire"), parent: join(cursorHome, "skills"), present: await exists(cursorHome) });
   targets.push({ host: "cursor", kind: "commands", dir: join(cursorHome, "commands"), parent: cursorHome, present: await exists(cursorHome), source: "hosts/cursor/commands", merge: true });
 
   const localBin = join(home, ".local", "bin");
-  targets.push({ host: "all", kind: "bin", dir: join(localBin, "crosscheck"), parent: localBin, present: await exists(localBin) });
+  targets.push({ host: "all", kind: "bin", dir: join(localBin, "crossfire"), parent: localBin, present: await exists(localBin) });
 
   return targets;
 }

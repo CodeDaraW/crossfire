@@ -22,7 +22,7 @@ export async function run(ctx) {
 
   // Anti-recursion: never trigger/block from within a child invocation.
   if (isChildInvocation(env)) {
-    emit("ALLOW", "advisory: running inside a crosscheck child invocation", { source: "anti-recursion" }, json);
+    emit("ALLOW", "advisory: running inside a crossfire child invocation", { source: "anti-recursion" }, json);
     return 0;
   }
 

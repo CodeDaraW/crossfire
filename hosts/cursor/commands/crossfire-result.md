@@ -1,7 +1,7 @@
-# Crosscheck result
+# Crossfire result
 
 ```bash
-crosscheck result --self cursor "$ARGUMENTS"
+crossfire result --self cursor "$ARGUMENTS"
 ```
 
 Present findings faithfully and STOP; ask before changing code.

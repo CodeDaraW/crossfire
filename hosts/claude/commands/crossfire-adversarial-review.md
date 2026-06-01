@@ -1,12 +1,12 @@
 ---
 description: Adversarial design/risk challenge review by another agent (read-only).
 disable-model-invocation: true
-allowed-tools: Read, Glob, Grep, Bash(crosscheck:*), Bash(node:*), Bash(git:*)
+allowed-tools: Read, Glob, Grep, Bash(crossfire:*), Bash(node:*), Bash(git:*)
 ---
 
 Run a read-only adversarial review (challenge the design, find no-ship reasons) and
 return the output verbatim. REVIEW-ONLY.
 
 ```bash
-crosscheck adversarial-review --self claude $ARGUMENTS
+crossfire adversarial-review --self claude $ARGUMENTS
 ```

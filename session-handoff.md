@@ -2,9 +2,9 @@
 
 ## Current Objective
 
-- Goal: Make harness-generated project records real after flattening the Crosscheck repo into the root directory.
-- Current status: Documentation/harness artifacts have been replaced with Crosscheck-specific content. Baseline verification passes in the flattened repo root.
-- Branch / commit: Current branch has recent commits `817a881 Flatten crosscheck project into repo root` and `8e620e5 Add crosscheck cross-agent review/rescue system`.
+- Goal: Make harness-generated project records real after flattening the Crossfire repo into the root directory.
+- Current status: Documentation/harness artifacts have been replaced with Crossfire-specific content. Baseline verification passes in the flattened repo root.
+- Branch / commit: Current branch has recent commits `817a881 Flatten crossfire project into repo root` and `8e620e5 Add crossfire cross-agent review/rescue system`.
 
 ## Completed This Session
 
@@ -21,6 +21,7 @@
 - [x] Reorganized README in a `codex-plugin-cc`-style structure and added `README.zh-Hans.md`.
 - [x] Aligned license metadata with `openai/codex-plugin-cc` using Apache-2.0 and added acknowledgements to both READMEs.
 - [x] Reframed README usage around coding-agent skill/command UX, with CLI documented as the runtime/debug layer.
+- [x] Renamed the project surface to Crossfire across package/bin, host commands, skills, config/state paths, environment variables, docs, and tests.
 
 ## Verification Evidence
 
@@ -31,6 +32,8 @@
 | Bilingual README baseline | `./init.sh` | passed | 2026-06-01 16:01 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
 | License/acknowledgement baseline | `./init.sh` | passed | 2026-06-01 16:05 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
 | Agent-first README baseline | `./init.sh` | passed | 2026-06-01 16:33 Asia/Shanghai; final README pass; 48 node tests passed; smoke returned `SMOKE OK`. |
+| Crossfire rename baseline | `./init.sh` | passed | 2026-06-01 21:40 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
+| Rename residual scan | `rg --no-ignore` + `find` | passed | No old project name remained outside `.git`, `node_modules`, and `.agents`. |
 
 ## Files Changed
 
@@ -44,6 +47,11 @@
 - `LICENSE`
 - `package.json`
 - `package-lock.json`
+- `bin/crossfire.mjs`
+- `hosts/claude/commands/crossfire-*.md`
+- `hosts/claude/agents/crossfire-rescue.md`
+- `hosts/cursor/commands/crossfire-*.md`
+- `skills/crossfire*`
 - `docs/PRODUCT.md`
 - `docs/ARCHITECTURE.md`
 - `docs/SPEC.md`

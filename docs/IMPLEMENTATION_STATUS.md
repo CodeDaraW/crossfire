@@ -1,10 +1,10 @@
-# Crosscheck Implementation Status
+# Crossfire Implementation Status
 
 Last updated: 2026-06-01 15:31 Asia/Shanghai
 
 ## Current Shape
 
-The project has been flattened into the repository root. The previous nested `crosscheck/` directory is gone from the working layout.
+The project has been flattened into the repository root. The previous nested `crossfire/` directory is gone from the working layout.
 
 Main implementation directories:
 
@@ -18,7 +18,7 @@ Main implementation directories:
 
 ## Implemented
 
-- Node CLI entrypoint: `bin/crosscheck.mjs`
+- Node CLI entrypoint: `bin/crossfire.mjs`
 - Commands: `doctor`, `setup`, `review`, `adversarial-review`, `rescue`, `task`, `gate`, `status`, `result`, `cancel`, `install`, `uninstall`
 - Reviewer adapters: Cursor, Claude, Codex
 - Executor adapters: Cursor, Claude, Codex
@@ -55,13 +55,13 @@ From the 2026-05-30 white-box and black-box pass before the repo flattening:
 
 - `node --test tests/*.test.mjs`: 42 tests passed
 - `node scripts/smoke.mjs`: passed
-- `crosscheck --help` and `crosscheck --version`: passed
+- `crossfire --help` and `crossfire --version`: passed
 - Branch and commit review with tracked `.env`: secret content did not leak; `omitted_files` recorded `.env`
 - Real Cursor review: completed, schema-valid, no repo mutation
 - Real Codex review: completed, schema-valid, no repo mutation
 - Real Claude review: completed, schema-valid, no repo mutation
 - Real Codex write rescue: created `rescue-note.txt`, recorded `touched_files=["rescue-note.txt"]`
-- Background job with repo-external `CROSSCHECK_DATA_DIR`: completed and returned result
+- Background job with repo-external `CROSSFIRE_DATA_DIR`: completed and returned result
 
 Real-agent E2E should be rerun after flattening for adapter, state, permission, and host-integration changes.
 
@@ -75,7 +75,7 @@ File: `src/reviewers/registry.mjs`
 
 Prior observed behavior:
 
-- If a reviewer exits non-zero but writes stdout, Crosscheck parses stdout and marks the reviewer `completed`.
+- If a reviewer exits non-zero but writes stdout, Crossfire parses stdout and marks the reviewer `completed`.
 - Example black-box reproduction: fake reviewer prints `ERROR: authentication failed` and exits 1; result has `status=completed`, `reviewer_failures=[]`.
 
 Current regression evidence:
@@ -113,7 +113,7 @@ Files: `src/runtime/state.mjs`, `src/runtime/jobs.mjs`, `src/runtime/review-runn
 
 Prior observed behavior:
 
-- If `CROSSCHECK_DATA_DIR` points inside the target repo, background worker writes make the repo dirty during review.
+- If `CROSSFIRE_DATA_DIR` points inside the target repo, background worker writes make the repo dirty during review.
 - This can turn an approve arbitration into `needs-attention`.
 
 Current regression evidence:
@@ -144,7 +144,7 @@ Current regression evidence:
 Use an external state dir during E2E:
 
 ```bash
-export CROSSCHECK_DATA_DIR="$(mktemp -d)"
+export CROSSFIRE_DATA_DIR="$(mktemp -d)"
 ```
 
 Claude should use the default CLI configuration unless a private local test
@@ -152,7 +152,7 @@ environment explicitly overrides adapter args outside committed docs.
 
 Suggested matrix:
 
-- `crosscheck doctor --json`
+- `crossfire doctor --json`
 - Cursor as reviewer
 - Codex as reviewer
 - Claude as reviewer

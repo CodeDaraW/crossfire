@@ -6,7 +6,7 @@ import { stateExcludeDir } from "./state.mjs";
 
 /**
  * Host-agnostic review execution: build prompts, fan out reviewers in parallel,
- * detect repo mutation, arbitrate, and assemble the crosscheck result object.
+ * detect repo mutation, arbitrate, and assemble the crossfire result object.
  *
  * @param {object} params
  * @param {Array}  detected  detection result from detectAll()
@@ -15,7 +15,7 @@ import { stateExcludeDir } from "./state.mjs";
 export async function runReviewJob(params, detected, onPhase) {
   const { kind, self, target, context, reviewers, warnings = [], focus, timeoutMs, env } = params;
   const repoRoot = target.repoRoot;
-  // Exclude the crosscheck state dir so background workers writing job/raw/result
+  // Exclude the crossfire state dir so background workers writing job/raw/result
   // files inside the repo don't get mistaken for the reviewer mutating the tree.
   const excludeDir = stateExcludeDir(repoRoot, env);
 

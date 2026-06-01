@@ -43,7 +43,7 @@ export async function collectContext(target, config, options = {}) {
   if (secretFiles.length) {
     out.omitted_files.push(...secretFiles.map((f) => ({ file: f, reason: "secret-path-redacted" })));
   }
-  // Pathspec that excludes secret files (and the crosscheck state dir, if it
+  // Pathspec that excludes secret files (and the crossfire state dir, if it
   // lives inside the repo) from every diff/stat command below.
   const excludeSpecs = [
     ...secretFiles.map((f) => `:(exclude)${f}`),

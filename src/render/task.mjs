@@ -1,6 +1,6 @@
 export function renderTaskText(r) {
   const lines = [];
-  lines.push(`# Crosscheck ${r.mode} task -> ${r.name}`);
+  lines.push(`# Crossfire ${r.mode} task -> ${r.name}`);
   lines.push(`status: ${r.status}`);
   if (r.warnings?.length) {
     for (const w of r.warnings) lines.push(`WARNING: ${w}`);
@@ -15,7 +15,7 @@ export function renderTaskText(r) {
   lines.push((r.final_message || "").trim() || "(no output)");
   if (r.mode === "write") {
     lines.push("");
-    lines.push("Note: changes were made by another agent. Consider running `crosscheck review` on them.");
+    lines.push("Note: changes were made by another agent. Consider running `crossfire review` on them.");
   }
   return lines.join("\n");
 }

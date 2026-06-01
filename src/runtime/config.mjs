@@ -5,7 +5,7 @@ import { join } from "node:path";
 export const DEFAULT_CONFIG = {
   reviewers: {
     default: "non-self-available",
-    // `args` are fixed leading arguments injected before crosscheck's own flags,
+    // `args` are fixed leading arguments injected before crossfire's own flags,
     // for private site-specific CLI requirements.
     cursor: { bin: "cursor-agent", args: [], model: null, timeout_ms: 600000 },
     claude: { bin: "claude", args: [], model: null, timeout_ms: 600000 },
@@ -54,11 +54,11 @@ async function readJsonIfExists(path) {
 /** Merge defaults < user config < repo config (CLI/env applied by callers). */
 export async function loadConfig(repoRootPath, env = process.env) {
   let cfg = DEFAULT_CONFIG;
-  const userPath = join(env.CROSSCHECK_CONFIG_HOME || homedir(), ".crosscheck", "config.json");
+  const userPath = join(env.CROSSFIRE_CONFIG_HOME || homedir(), ".crossfire", "config.json");
   const user = await readJsonIfExists(userPath);
   if (user) cfg = deepMerge(cfg, user);
   if (repoRootPath) {
-    const repo = await readJsonIfExists(join(repoRootPath, ".crosscheck", "config.json"));
+    const repo = await readJsonIfExists(join(repoRootPath, ".crossfire", "config.json"));
     if (repo) cfg = deepMerge(cfg, repo);
   }
   return cfg;

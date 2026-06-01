@@ -6,7 +6,7 @@ main(process.argv.slice(2)).then(
     process.exitCode = code ?? 0;
   },
   (err) => {
-    process.stderr.write(`crosscheck: fatal: ${err?.stack || err}\n`);
+    process.stderr.write(`crossfire: fatal: ${err?.stack || err}\n`);
     process.exitCode = 1;
   },
 );

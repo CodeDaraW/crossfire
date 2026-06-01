@@ -8,12 +8,12 @@ import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 
 const HERE = fileURLToPath(new URL(".", import.meta.url));
-const BIN = join(HERE, "..", "bin", "crosscheck.mjs");
+const BIN = join(HERE, "..", "bin", "crossfire.mjs");
 const FAKE_CLAUDE = join(HERE, "..", "tests", "fixtures", "fake-claude.mjs");
 const FAKE_CODEX = join(HERE, "..", "tests", "fixtures", "fake-codex.mjs");
 
-const repo = await mkdtemp(join(tmpdir(), "crosscheck-smoke-"));
-const env = { ...process.env, CURSOR_AGENT: "", CLAUDECODE: "", CROSSCHECK_DATA_DIR: join(repo, ".state") };
+const repo = await mkdtemp(join(tmpdir(), "crossfire-smoke-"));
+const env = { ...process.env, CURSOR_AGENT: "", CLAUDECODE: "", CROSSFIRE_DATA_DIR: join(repo, ".state") };
 const cc = (args) => execFileSync(process.execPath, [BIN, ...args], { cwd: repo, env, encoding: "utf8" });
 const git = (args) => execFileSync("git", args, { cwd: repo, stdio: "pipe" });
 
@@ -26,9 +26,9 @@ try {
   git(["add", "."]);
   git(["commit", "-qm", "init"]);
   await writeFile(join(repo, "handler.js"), "function h(i){return i.value.trim();}\n");
-  await mkdir(join(repo, ".crosscheck"), { recursive: true });
+  await mkdir(join(repo, ".crossfire"), { recursive: true });
   await writeFile(
-    join(repo, ".crosscheck", "config.json"),
+    join(repo, ".crossfire", "config.json"),
     JSON.stringify({ reviewers: { claude: { bin: FAKE_CLAUDE }, codex: { bin: FAKE_CODEX } } }),
   );
 

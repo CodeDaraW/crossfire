@@ -1,4 +1,4 @@
-# Crosscheck
+# Crossfire
 
 [简体中文](README.zh-Hans.md)
 
@@ -20,7 +20,7 @@ The installer writes symlinks into agent home directories it detects. If a host 
 node scripts/install.mjs --copy
 ```
 
-Add the `export PATH` line to your shell config to make it persistent — host commands call `crosscheck` by name.
+Add the `export PATH` line to your shell config to make it persistent — host commands call `crossfire` by name.
 
 Restart your agent if it doesn't pick up new skills/commands automatically.
 
@@ -30,37 +30,37 @@ In any git repo, open your coding agent and run:
 
 **Codex:**
 ```
-Use crosscheck to review my current changes.
+Use crossfire to review my current changes.
 ```
 
 **Claude Code:**
 ```
-/crosscheck-review
+/crossfire-review
 ```
 
 **Cursor:**
 ```
-crosscheck-review
+crossfire-review
 ```
 
 First time? Check readiness first:
 
-- **Codex:** `Use crosscheck to check setup for this repo`
-- **Claude:** `/crosscheck-setup`
-- **Cursor:** `crosscheck-setup`
+- **Codex:** `Use crossfire to check setup for this repo`
+- **Claude:** `/crossfire-setup`
+- **Cursor:** `crossfire-setup`
 
 ## Commands
 
 | Action | Codex | Claude Code | Cursor |
 |--------|-------|-------------|--------|
-| Setup | `Use crosscheck to check setup` | `/crosscheck-setup` | `crosscheck-setup` |
-| Review | `Use crosscheck to review` | `/crosscheck-review` | `crosscheck-review` |
-| Adversarial review | `Use crosscheck adversarial review` | `/crosscheck-adversarial-review` | `crosscheck-adversarial-review` |
-| Rescue (read-only) | `Use crosscheck rescue in read-only mode` | `/crosscheck-rescue --read-only` | `crosscheck-rescue --read-only` |
-| Rescue (write) | `Use crosscheck rescue with write` | `/crosscheck-rescue --write` | `crosscheck-rescue --write` |
-| Status | `Use crosscheck status` | `/crosscheck-status` | `crosscheck-status` |
-| Result | `Use crosscheck result` | `/crosscheck-result <id>` | `crosscheck-result <id>` |
-| Cancel | `Use crosscheck cancel` | `/crosscheck-cancel <id>` | `crosscheck-cancel <id>` |
+| Setup | `Use crossfire to check setup` | `/crossfire-setup` | `crossfire-setup` |
+| Review | `Use crossfire to review` | `/crossfire-review` | `crossfire-review` |
+| Adversarial review | `Use crossfire adversarial review` | `/crossfire-adversarial-review` | `crossfire-adversarial-review` |
+| Rescue (read-only) | `Use crossfire rescue in read-only mode` | `/crossfire-rescue --read-only` | `crossfire-rescue --read-only` |
+| Rescue (write) | `Use crossfire rescue with write` | `/crossfire-rescue --write` | `crossfire-rescue --write` |
+| Status | `Use crossfire status` | `/crossfire-status` | `crossfire-status` |
+| Result | `Use crossfire result` | `/crossfire-result <id>` | `crossfire-result <id>` |
+| Cancel | `Use crossfire cancel` | `/crossfire-cancel <id>` | `crossfire-cancel <id>` |
 
 Review commands are read-only. Rescue with `--write` is the only path for delegated edits.
 
@@ -69,19 +69,19 @@ Review commands are read-only. Rescue with `--write` is the only path for delega
 For debugging or automation:
 
 ```bash
-crosscheck review --self codex --wait
-crosscheck adversarial-review --self codex "focus on rollback risk"
-crosscheck rescue --self codex --write --only claude "fix the failing test"
-crosscheck status <job-id> --wait
-crosscheck result <job-id>
-crosscheck doctor --self codex
+crossfire review --self codex --wait
+crossfire adversarial-review --self codex "focus on rollback risk"
+crossfire rescue --self codex --write --only claude "fix the failing test"
+crossfire status <job-id> --wait
+crossfire result <job-id>
+crossfire doctor --self codex
 ```
 
 Pass `--self` to identify the current host. Use `--only` or `--executor` to target a specific agent.
 
 ## Config
 
-Most projects need no config. For custom binary paths or timeouts, add `.crosscheck/config.json`:
+Most projects need no config. For custom binary paths or timeouts, add `.crossfire/config.json`:
 
 ```json
 {
@@ -103,13 +103,13 @@ Most projects need no config. For custom binary paths or timeouts, add `.crossch
 
 ## FAQ
 
-**Do I need separate accounts?** No. Crosscheck uses existing CLI authentication.
+**Do I need separate accounts?** No. Crossfire uses existing CLI authentication.
 
 **Does it install into every project?** No. Install once, then use in any git repo.
 
 **Can review modify files?** No. Use rescue `--write` for delegated edits.
 
-**Where does job state live?** `~/.crosscheck/state/<repo-slug>-<hash>/`
+**Where does job state live?** `~/.crossfire/state/<repo-slug>-<hash>/`
 
 ## Acknowledgements
 

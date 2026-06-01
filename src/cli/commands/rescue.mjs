@@ -19,19 +19,19 @@ export async function run(ctx) {
   const self = detectSelf(flags, env);
   const root = await repoRoot(cwd);
   if (!root) {
-    process.stderr.write("crosscheck: not a git repository\n");
+    process.stderr.write("crossfire: not a git repository\n");
     return 2;
   }
   const request = positionals.join(" ").trim();
   if (!request) {
-    process.stderr.write("crosscheck rescue: a request is required\n");
+    process.stderr.write("crossfire rescue: a request is required\n");
     return 2;
   }
 
   const detected = await detectExecutors(config, env);
   const sel = selectExecutor({ self, flags, detected });
   if (sel.error) {
-    process.stderr.write(`crosscheck: ${sel.error}\n`);
+    process.stderr.write(`crossfire: ${sel.error}\n`);
     return 2;
   }
   const executorEntry = detected.find((d) => d.name === sel.executor);
@@ -41,7 +41,7 @@ export async function run(ctx) {
   const write = mode === "write";
   const timeoutMs = flagInt(flags, "timeout-ms", 900000);
 
-  process.stderr.write(`crosscheck rescue -> executor=${sel.executor} mode=${mode} resume=${resume}\n`);
+  process.stderr.write(`crossfire rescue -> executor=${sel.executor} mode=${mode} resume=${resume}\n`);
 
   const result = await runTask({
     executorEntry,

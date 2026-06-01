@@ -26,10 +26,10 @@ test("scrubEnv drops secrets, keeps auth allowlist, sets child flag", () => {
   assert.equal(out.OPENAI_API_KEY, "keep");
   assert.equal(out.MY_SECRET, undefined);
   assert.equal(out.GITHUB_TOKEN, undefined);
-  assert.equal(out.CROSSCHECK_CHILD, "1");
+  assert.equal(out.CROSSFIRE_CHILD, "1");
 });
 
 test("isChildInvocation", () => {
-  assert.equal(isChildInvocation({ CROSSCHECK_CHILD: "1" }), true);
+  assert.equal(isChildInvocation({ CROSSFIRE_CHILD: "1" }), true);
   assert.equal(isChildInvocation({}), false);
 });

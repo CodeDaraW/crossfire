@@ -13,7 +13,7 @@ let repo;
 const git = (args) => execFileSync("git", args, { cwd: repo, stdio: "pipe" });
 
 before(async () => {
-  repo = await mkdtemp(join(tmpdir(), "crosscheck-ctx-"));
+  repo = await mkdtemp(join(tmpdir(), "crossfire-ctx-"));
   git(["init", "-q"]);
   git(["config", "user.email", "t@t.co"]);
   git(["config", "user.name", "t"]);

@@ -1,10 +1,10 @@
 {
-  "name": "crosscheck",
+  "name": "crossfire",
   "version": "0.1.0",
   "description": "Cross-agent code review / rescue system for Codex, Cursor, and Claude Code.",
   "type": "module",
   "bin": {
-    "crosscheck": "bin/crosscheck.mjs"
+    "crossfire": "bin/crossfire.mjs"
   },
   "exports": {
     ".": "./src/cli/main.mjs"
@@ -15,7 +15,7 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "smoke": "node scripts/smoke.mjs",
-    "crosscheck": "node bin/crosscheck.mjs"
+    "crossfire": "node bin/crossfire.mjs"
   },
   "files": [
     "bin",

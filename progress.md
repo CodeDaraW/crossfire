@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Last Updated:** 2026-06-01 16:33 Asia/Shanghai  
+**Last Updated:** 2026-06-01 21:40 Asia/Shanghai
 **Active Feature:** feat-001 - Harness baseline and real project records  
-**Repository Shape:** Project was flattened from `crosscheck/` into the repo root. Runtime files now live at `bin/`, `src/`, `skills/`, `hosts/`, `tests/`, and `docs/`.
+**Repository Shape:** Project was flattened from `crossfire/` into the repo root. Runtime files now live at `bin/`, `src/`, `skills/`, `hosts/`, `tests/`, and `docs/`.
 
 ## Status
 
@@ -31,11 +31,12 @@
 - [x] README now documents install, per-project initialization, optional project config, and quick manual tests.
 - [x] README has been reorganized in a `codex-plugin-cc`-style structure and `README.zh-Hans.md` has been added.
 - [x] License metadata now aligns with `openai/codex-plugin-cc` using Apache-2.0, with acknowledgements added to both READMEs.
-- [x] README now presents Crosscheck as an agent skill/command workflow first, with the CLI documented as the shared runtime/debug layer.
+- [x] README now presents Crossfire as an agent skill/command workflow first, with the CLI documented as the shared runtime/debug layer.
+- [x] Project naming has been changed to Crossfire across package metadata, CLI binary, host commands, skills, config/state directories, environment variables, docs, and tests.
 
 ### What's In Progress
 
-- [x] Replace harness placeholders with Crosscheck-specific product, architecture, decision, implementation-status, progress, and handoff records.
+- [x] Replace harness placeholders with Crossfire-specific product, architecture, decision, implementation-status, progress, and handoff records.
   - Details: Convert historical design discussion into durable docs that a future agent can use directly.
   - Blockers: none.
 
@@ -81,13 +82,17 @@
 - `LICENSE` - Apache-2.0 license text aligned with `openai/codex-plugin-cc`.
 - `package.json` - License metadata aligned to Apache-2.0.
 - `package-lock.json` - Root package license metadata aligned to Apache-2.0.
+- `bin/crossfire.mjs` - Renamed CLI entrypoint.
+- `hosts/claude/commands/crossfire-*.md` - Renamed Claude commands.
+- `hosts/cursor/commands/crossfire-*.md` - Renamed Cursor commands.
+- `skills/crossfire*` - Renamed portable skills.
 - `docs/PRODUCT.md` - Product contract.
 - `docs/ARCHITECTURE.md` - Runtime architecture.
 - `docs/SPEC.md` - Current detailed contracts extracted from historical process docs.
 - `docs/DECISIONS.md` - Durable decision log.
 - `docs/IMPLEMENTATION_STATUS.md` - Verified status and open findings.
 - Five historical process docs under `docs/` - Removed after useful content was extracted.
-- `skills/crosscheck/references/adapters.md` - Removed local Claude settings examples from adapter docs.
+- `skills/crossfire/references/adapters.md` - Removed local Claude settings examples from adapter docs.
 - `src/runtime/config.mjs` - Removed local Claude settings example from default config comments.
 - `tests/adapters.test.mjs` - Replaced local Claude settings fixture with a generic fixed-args fixture.
 
@@ -100,7 +105,8 @@ Latest README update:
 - Reorganized into What You Get, Install, First Run, Usage, Typical Flows, Configuration, Safety, FAQ.
 - Added a Simplified Chinese version with matching content.
 - Added Apache-2.0 license sections and `openai/codex-plugin-cc` acknowledgements to both READMEs.
-- Reworked usage docs around Codex skill prompts plus Claude/Cursor `crosscheck-*` commands; direct CLI examples are now secondary.
+- Reworked usage docs around Codex skill prompts plus Claude/Cursor `crossfire-*` commands; direct CLI examples are now secondary.
+- Renamed the product surface to Crossfire, including CLI command `crossfire`, `.crossfire` config/state paths, and `CROSSFIRE_*` environment variables.
 
 ## Evidence of Completion
 
@@ -119,6 +125,11 @@ Latest README update:
 - [x] Baseline after agent-first README rewrite: `./init.sh`
   - Result: 48 tests passed; smoke returned `SMOKE OK`.
   - Last run: 2026-06-01 16:33 Asia/Shanghai.
+- [x] Baseline after Crossfire rename: `./init.sh`
+  - Result: 48 tests passed; smoke returned `SMOKE OK`.
+  - Last run: 2026-06-01 21:40 Asia/Shanghai.
+- [x] Rename residual scan
+  - Result: no old project name remained in tracked or ignored workspace files, excluding `.git`, `node_modules`, and `.agents`.
 - [x] Documentation reviewed for stale nested path references.
 
 ## Notes for Next Session

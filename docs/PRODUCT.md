@@ -1,8 +1,8 @@
-# Crosscheck Product Contract
+# Crossfire Product Contract
 
 ## Purpose
 
-Crosscheck is a cross-agent code review and rescue system for Codex, Cursor, and Claude Code. It generalizes the `codex-plugin-cc` idea from a one-way "Claude Code calls Codex" workflow into a multi-host system where the current host can ask other coding agents to review or handle a delegated task.
+Crossfire is a cross-agent code review and rescue system for Codex, Cursor, and Claude Code. It generalizes the `codex-plugin-cc` idea from a one-way "Claude Code calls Codex" workflow into a multi-host system where the current host can ask other coding agents to review or handle a delegated task.
 
 The product target is the complete `codex-plugin-cc` style capability set, not a demo. Implementation cost is not used to shrink product scope.
 
@@ -27,7 +27,7 @@ Contract:
 - Always read-only.
 - Default reviewer set is all available non-self agents.
 - Self review requires explicit opt-in through `--allow-self` or a direct `--only` selection.
-- Crosscheck collects Git context, invokes reviewers, normalizes output, stores raw output, and deterministically arbitrates findings.
+- Crossfire collects Git context, invokes reviewers, normalizes output, stores raw output, and deterministically arbitrates findings.
 - Review must never auto-fix code. If a fix is desired, use the rescue/task lane and then review the result.
 
 ### Rescue / Task Lane
@@ -63,14 +63,14 @@ Contract:
 
 - Review/gate/adversarial commands run with read-only policy and detect repo mutation before/after.
 - Dangerous agent flags are not allowed in review invocation.
-- Child invocations set `CROSSCHECK_CHILD=1` to avoid recursive gate loops.
+- Child invocations set `CROSSFIRE_CHILD=1` to avoid recursive gate loops.
 - Environment variables are scrubbed before spawning agent CLIs.
 - Secret-looking changed paths such as `.env`, `.env.*`, private keys, and certificates are omitted from prompt context and recorded in `omitted_files`.
 - State data should live outside the target repo by default. Repo-internal state dirs can corrupt mutation detection.
 
 ## Completion Benchmark
 
-Crosscheck is considered product-complete only when these are all true:
+Crossfire is considered product-complete only when these are all true:
 
 - Cursor, Claude, and Codex adapters have tested review and task invocation contracts.
 - Review-only lane cannot silently mutate the repo.

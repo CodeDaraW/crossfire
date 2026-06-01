@@ -16,19 +16,19 @@ export async function run(ctx) {
   const self = detectSelf(flags, env);
   const root = await repoRoot(cwd);
   if (!root) {
-    process.stderr.write("crosscheck: not a git repository\n");
+    process.stderr.write("crossfire: not a git repository\n");
     return 2;
   }
   const taskText = positionals.join(" ").trim();
   if (!taskText) {
-    process.stderr.write("crosscheck task: a task/prompt is required\n");
+    process.stderr.write("crossfire task: a task/prompt is required\n");
     return 2;
   }
 
   const detected = await detectExecutors(config, env);
   const sel = selectExecutor({ self, flags, detected });
   if (sel.error) {
-    process.stderr.write(`crosscheck: ${sel.error}\n`);
+    process.stderr.write(`crossfire: ${sel.error}\n`);
     return 2;
   }
   const executorEntry = detected.find((d) => d.name === sel.executor);

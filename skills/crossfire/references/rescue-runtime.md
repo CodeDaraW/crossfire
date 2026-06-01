@@ -7,4 +7,4 @@
 - Resume: continue/keep going/resume/继续/上次 -> `--resume`; `--fresh` forces new.
 - A write rescue records touched files and a pre/post status diff; read-only that
   mutates the repo is flagged as a safety violation.
-- The forwarder is thin: one `crosscheck task` call, stdout returned verbatim.
+- The forwarder is thin: one `crossfire task` call, stdout returned verbatim.

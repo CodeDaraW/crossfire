@@ -32,7 +32,7 @@ export async function run(ctx) {
   }
 
   const out = [];
-  out.push(`crosscheck doctor`);
+  out.push(`crossfire doctor`);
   out.push(`self host: ${self}`);
   out.push(`git: ${git.available ? git.version : "NOT FOUND"}`);
   out.push("");

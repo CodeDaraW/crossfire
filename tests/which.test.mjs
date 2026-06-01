@@ -7,11 +7,11 @@ import { which } from "../src/runtime/process.mjs";
 import { stateExcludeDir } from "../src/runtime/state.mjs";
 
 test("stateExcludeDir returns top segment when data dir is inside repo", async () => {
-  const repo = await mkdtemp(join(tmpdir(), "crosscheck-state-"));
+  const repo = await mkdtemp(join(tmpdir(), "crossfire-state-"));
   try {
-    const seg = stateExcludeDir(repo, { CROSSCHECK_DATA_DIR: join(repo, ".state") });
+    const seg = stateExcludeDir(repo, { CROSSFIRE_DATA_DIR: join(repo, ".state") });
     assert.equal(seg, ".state");
-    const outside = stateExcludeDir(repo, { CROSSCHECK_DATA_DIR: "/tmp/elsewhere-xyz" });
+    const outside = stateExcludeDir(repo, { CROSSFIRE_DATA_DIR: "/tmp/elsewhere-xyz" });
     assert.equal(outside, null);
   } finally {
     await rm(repo, { recursive: true, force: true });
@@ -28,7 +28,7 @@ test("returns null for a non-existent bare command", async () => {
 });
 
 test("absolute path with spaces is checked via access, not mangled", async () => {
-  const dir = await mkdtemp(join(tmpdir(), "crosscheck which test "));
+  const dir = await mkdtemp(join(tmpdir(), "crossfire which test "));
   const bin = join(dir, "my agent.mjs");
   await writeFile(bin, "#!/usr/bin/env node\nprocess.exit(0)\n");
   await chmod(bin, 0o755);

@@ -1,4 +1,4 @@
-// Minimal, dependency-free argument parser for crosscheck.
+// Minimal, dependency-free argument parser for crossfire.
 //
 // Flags that take a value must be listed in VALUE_FLAGS; everything else
 // starting with `--` (or known short aliases) is treated as a boolean.

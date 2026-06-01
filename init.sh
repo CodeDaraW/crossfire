@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-echo "=== Crosscheck Harness Initialization ==="
+echo "=== Crossfire Harness Initialization ==="
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"

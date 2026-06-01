@@ -1,4 +1,4 @@
-# Crosscheck Current Specification
+# Crossfire Current Specification
 
 This document preserves the useful implementation contracts that used to live
 in the historical planning and review process docs. It should be read with
@@ -9,7 +9,7 @@ in the historical planning and review process docs. It should be read with
 Main entry:
 
 ```bash
-crosscheck <command> [options] [focus...]
+crossfire <command> [options] [focus...]
 ```
 
 Commands:
@@ -62,7 +62,7 @@ Default base detection: `origin/HEAD`, `origin/main`, `origin/master`, `main`, t
 
 ## Context Collection
 
-Crosscheck deterministically extracts reviewer context before invoking agents.
+Crossfire deterministically extracts reviewer context before invoking agents.
 
 Working-tree context includes status, staged diff, unstaged diff, diff stat,
 changed file list, and small untracked file contents. Branch/commit context
@@ -82,7 +82,7 @@ Secret-path handling:
 
 State-dir handling:
 
-- If `CROSSCHECK_DATA_DIR` is inside the target repo, Crosscheck excludes that top-level state directory from context and mutation fingerprints.
+- If `CROSSFIRE_DATA_DIR` is inside the target repo, Crossfire excludes that top-level state directory from context and mutation fingerprints.
 - Repo-external state remains the preferred default.
 
 ## Reviewer Contract
@@ -133,7 +133,7 @@ Intent classification:
 
 Write auditing:
 
-- Crosscheck records pre/post status and content-aware working tree fingerprints.
+- Crossfire records pre/post status and content-aware working tree fingerprints.
 - Write mode uses per-file fingerprints so edits to already-dirty files appear in `touched_files`.
 - Read-only mode that mutates the repo returns an error and warning.
 
@@ -224,7 +224,7 @@ or overwrite raw reviewer results.
 State root:
 
 ```text
-${CROSSCHECK_DATA_DIR:-$HOME/.crosscheck}/state/<repo-slug>-<hash>/
+${CROSSFIRE_DATA_DIR:-$HOME/.crossfire}/state/<repo-slug>-<hash>/
   jobs/<job-id>.json
   jobs/<job-id>.result.json
   jobs/<job-id>.raw.<reviewer>.log
@@ -277,15 +277,15 @@ Rules:
 - If previous-turn data shows no code changes, gate returns `ALLOW`.
 - Reviewer first line must be `ALLOW: <reason>` or `BLOCK: <reason>`.
 - Only Claude Stop hook is treated as blocking in the current product contract; other hosts are advisory unless proven otherwise.
-- `CROSSCHECK_CHILD=1` disables recursive gate behavior.
+- `CROSSFIRE_CHILD=1` disables recursive gate behavior.
 
 ## Configuration
 
 Merge order:
 
 1. defaults in `src/runtime/config.mjs`
-2. user config at `${CROSSCHECK_CONFIG_HOME:-$HOME}/.crosscheck/config.json`
-3. repo config at `.crosscheck/config.json`
+2. user config at `${CROSSFIRE_CONFIG_HOME:-$HOME}/.crossfire/config.json`
+3. repo config at `.crossfire/config.json`
 4. command flags and environment handled by callers/adapters
 
 Defaults:
@@ -337,7 +337,7 @@ Required local checks:
 
 Real-agent E2E should cover:
 
-- `crosscheck doctor --json`
+- `crossfire doctor --json`
 - Cursor reviewer
 - Codex reviewer
 - Claude reviewer
