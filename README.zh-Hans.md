@@ -4,6 +4,10 @@
 
 跨 Agent 代码审查与任务分派，支持 **Codex**、**Cursor**、**Claude Code**。
 
+| Codex | Cursor | Claude Code |
+|-------|--------|-------------|
+| ![Crossfire Codex demo](https://cdn-eo.daraw.cn/projects/crossfire/demo-codex.png) | ![Crossfire Cursor demo](https://cdn-eo.daraw.cn/projects/crossfire/demo-cursor.png) | ![Crossfire Claude demo](https://cdn-eo.daraw.cn/projects/crossfire/demo-claude.png) |
+
 ## 安装
 
 需要：Node.js 18+、`git`、至少一个非当前 Agent 的 CLI（`cursor-agent`、`claude` 或 `codex`）已安装并登录。

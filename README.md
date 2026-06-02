@@ -4,6 +4,10 @@
 
 Cross-agent code review and task delegation, supporting **Codex**, **Cursor**, and **Claude Code**.
 
+| Codex | Cursor | Claude Code |
+|-------|--------|-------------|
+| ![Crossfire Codex demo](https://cdn-eo.daraw.cn/projects/crossfire/demo-codex.png) | ![Crossfire Cursor demo](https://cdn-eo.daraw.cn/projects/crossfire/demo-cursor.png) | ![Crossfire Claude demo](https://cdn-eo.daraw.cn/projects/crossfire/demo-claude.png) |
+
 ## Install
 
 Requirements: Node.js 18+, `git`, and at least one non-self agent CLI (`cursor-agent`, `claude`, or `codex`) installed and authenticated.
