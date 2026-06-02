@@ -1,6 +1,6 @@
 # Crossfire Implementation Status
 
-Last updated: 2026-06-01 22:16 Asia/Shanghai
+Last updated: 2026-06-02 17:30 Asia/Shanghai
 
 ## Current Shape
 
@@ -33,19 +33,21 @@ Main implementation directories:
 - Portable skills and thin host assets
 - Unit and integration tests with fake agent CLIs
 - Smoke script with fake agents that exercises the user-facing `bin/crossfire` wrapper
+- Static host-asset tests that guard Cursor/Claude command prompts against
+  blindly passing natural-language agent mentions as focus/request text
 
 ## Current Local Verification
 
-Run from the flattened repo root on 2026-06-01:
+Run from the flattened repo root:
 
 ```bash
 ./init.sh
 ```
 
-Result:
+Latest result from 2026-06-02 17:30 Asia/Shanghai:
 
 - Node runtime: bundled Codex Node `v24.14.0`
-- Unit/integration tests: 48 passed, 0 failed
+- Unit/integration tests: 51 passed, 0 failed
 - Smoke tests: `SMOKE OK`, via `bin/crossfire`
 
 The harness fallback path is intentional: this non-interactive shell does not expose `node`/`npm`, so `init.sh` uses the bundled Node runtime and prepends it to `PATH` for fake-agent shebangs.

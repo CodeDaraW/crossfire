@@ -2,8 +2,8 @@
 
 ## Current Objective
 
-- Goal: Make harness-generated project records real after flattening the Crossfire repo into the root directory.
-- Current status: Documentation/harness artifacts have been replaced with Crossfire-specific content. Baseline verification passes in the flattened repo root.
+- Goal: Keep Crossfire host integration assets aligned with the runtime contract.
+- Current status: Documentation/harness artifacts have been replaced with Crossfire-specific content. Cursor and Claude review/adversarial/rescue command assets now instruct host agents to parse natural-language agent mentions into `--reviewer` or `--executor` instead of passing the whole phrase as focus/request text. Baseline verification passes in the flattened repo root.
 - Branch / commit: Current branch has recent commits `817a881 Flatten crossfire project into repo root` and `8e620e5 Add crossfire cross-agent review/task-delegation system`.
 
 ## Completed This Session
@@ -23,6 +23,9 @@
 - [x] Reframed README usage around coding-agent skill/command UX, with CLI documented as the runtime/debug layer.
 - [x] Renamed the project surface to Crossfire across package/bin, host commands, skills, config/state paths, environment variables, docs, and tests.
 - [x] Added user-facing `bin/crossfire` wrapper coverage to smoke verification while keeping internal JS re-entry paths deterministic.
+- [x] Fixed Cursor/Claude host command prompts so named agents in natural
+      language are translated to `--reviewer` or `--executor`.
+- [x] Added `tests/host-assets.test.mjs` to guard the command prompt contract.
 
 ## Verification Evidence
 
@@ -35,6 +38,7 @@
 | Agent-first README baseline | `./init.sh` | passed | 2026-06-01 16:33 Asia/Shanghai; final README pass; 48 node tests passed; smoke returned `SMOKE OK`. |
 | Crossfire rename baseline | `./init.sh` | passed | 2026-06-01 21:40 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
 | Executable wrapper coverage baseline | `./init.sh` | passed | 2026-06-01 22:16 Asia/Shanghai; 48 node tests passed; smoke exercised `bin/crossfire` and returned `SMOKE OK`. |
+| Host command named-agent parsing baseline | `./init.sh` | passed | 2026-06-02 17:30 Asia/Shanghai; 51 node tests passed; smoke returned `SMOKE OK`. |
 | Codex setup probe | `crossfire setup --self codex` | passed | 2026-06-01 22:16 Asia/Shanghai; reviewers available: `cursor, claude`. |
 | Rename residual scan | `rg --no-ignore` + `find` | passed | No old project name remained outside `.git`, `node_modules`, and `.agents`. |
 
@@ -55,6 +59,7 @@
 - `hosts/claude/commands/crossfire-*.md`
 - `hosts/claude/agents/crossfire-rescue.md`
 - `hosts/cursor/commands/crossfire-*.md`
+- `tests/host-assets.test.mjs`
 - `skills/crossfire*`
 - `docs/PRODUCT.md`
 - `docs/ARCHITECTURE.md`

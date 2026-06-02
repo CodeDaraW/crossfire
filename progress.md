@@ -2,8 +2,8 @@
 
 ## Current State
 
-**Last Updated:** 2026-06-01 21:40 Asia/Shanghai
-**Active Feature:** feat-001 - Harness baseline and real project records  
+**Last Updated:** 2026-06-02 17:30 Asia/Shanghai
+**Active Feature:** feat-005 - Host integration assets
 **Repository Shape:** Project was flattened from `crossfire/` into the repo root. Runtime files now live at `bin/`, `src/`, `skills/`, `hosts/`, `tests/`, and `docs/`.
 
 ## Status
@@ -33,11 +33,16 @@
 - [x] License metadata now aligns with `openai/codex-plugin-cc` using Apache-2.0, with acknowledgements added to both READMEs.
 - [x] README now presents Crossfire as an agent skill/command workflow first, with the CLI documented as the shared runtime/debug layer.
 - [x] Project naming has been changed to Crossfire across package metadata, CLI binary, host commands, skills, config/state directories, environment variables, docs, and tests.
+- [x] Cursor and Claude review/adversarial/rescue host commands now instruct the
+  host agent to parse natural-language agent mentions into `--reviewer` or
+  `--executor` instead of blindly passing `$ARGUMENTS` as focus/request text.
+- [x] `tests/host-assets.test.mjs` guards the named reviewer/executor parsing
+  instructions for Cursor and Claude command assets.
 
 ### What's In Progress
 
-- [x] Replace harness placeholders with Crossfire-specific product, architecture, decision, implementation-status, progress, and handoff records.
-  - Details: Convert historical design discussion into durable docs that a future agent can use directly.
+- [x] Fix host command natural-language agent selection drift.
+  - Details: Cursor `/crossfire-review 让 Codex 看看` was reported to fan out to all non-self reviewers because the command template passed the full phrase as focus text. Cursor and Claude review/adversarial/rescue commands now document explicit reviewer/executor extraction rules.
   - Blockers: none.
 
 ### What's Next
@@ -139,6 +144,9 @@ Latest entrypoint update:
 - [x] Baseline after executable wrapper coverage update: `./init.sh`
   - Result: 48 tests passed; smoke returned `SMOKE OK`.
   - Last run: 2026-06-01 22:16 Asia/Shanghai.
+- [x] Baseline after host command named-agent parsing update: `./init.sh`
+  - Result: 51 tests passed; smoke returned `SMOKE OK`.
+  - Last run: 2026-06-02 17:30 Asia/Shanghai.
 - [x] Codex host setup probe after executable wrapper coverage update
   - Result: `crossfire setup --self codex` reported reviewers `cursor, claude`.
 - [x] Rename residual scan
