@@ -78,6 +78,16 @@ test("--only selects a single reviewer", () => {
   assert.deepEqual(res.reviewers.map((r) => r.name), ["codex"]);
 });
 
+test("bare reviewer shorthand selects that reviewer", () => {
+  const out = runCC(["review", "--self", "cursor", "codex", "--wait", "--json"], {
+    FAKE_CLAUDE_SCENARIO: "fail",
+    FAKE_CODEX_SCENARIO: "approve",
+  });
+  const res = JSON.parse(out);
+  assert.deepEqual(res.reviewers.map((r) => r.name), ["codex"]);
+  assert.equal(res.arbitration.verdict, "approve");
+});
+
 test("rescue write touches files; read-only does not", () => {
   const wOut = runCC(["rescue", "--self", "cursor", "--only", "codex", "--write", "--json", "fix the bug"]);
   const w = JSON.parse(wOut);

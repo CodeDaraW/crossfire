@@ -21,7 +21,8 @@ export async function run(ctx) {
   }
 
   const detected = await detectAll(config, env);
-  const sel = selectReviewers({ self, flags, detected });
+  const normalized = normalizeReviewerShorthand(flags, positionals, detected);
+  const sel = selectReviewers({ self, flags: normalized.flags, detected });
   if (sel.error) {
     process.stderr.write(`crossfire: ${sel.error}\n`);
     for (const w of sel.warnings) process.stderr.write(`  warning: ${w}\n`);
@@ -34,7 +35,7 @@ export async function run(ctx) {
     return 0;
   }
 
-  const focus = positionals.join(" ").trim();
+  const focus = normalized.positionals.join(" ").trim();
   const timeoutMs = flagInt(flags, "timeout-ms", config.reviewers?.cursor?.timeout_ms || 600000);
   const jobParams = { kind, self, target, context, reviewers: sel.reviewers, warnings: sel.warnings, focus, timeoutMs, config, env };
 
@@ -87,4 +88,23 @@ export async function run(ctx) {
 
 function stripRaw(result) {
   return { ...result, reviewers: result.reviewers.map((r) => ({ ...r, raw_output: undefined })) };
+}
+
+function normalizeReviewerShorthand(flags, positionals, detected) {
+  if ((flags.only && flags.only.length) || (flags.reviewer && flags.reviewer.length) || positionals.length === 0) {
+    return { flags, positionals };
+  }
+
+  const knownAgents = new Set(detected.map((d) => d.name));
+  const requested = [];
+  for (const token of positionals) {
+    const parts = token
+      .split(/[,\s]+/)
+      .map((p) => p.trim())
+      .filter(Boolean);
+    if (parts.length === 0 || parts.some((p) => !knownAgents.has(p))) return { flags, positionals };
+    requested.push(...parts);
+  }
+
+  return { flags: { ...flags, reviewer: [...new Set(requested)] }, positionals: [] };
 }
