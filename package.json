@@ -1,7 +1,7 @@
 {
   "name": "crossfire",
   "version": "0.1.0",
-  "description": "Cross-agent code review / rescue system for Codex, Cursor, and Claude Code.",
+  "description": "Cross-agent code review and task delegation across Codex, Cursor, and Claude Code.",
   "type": "module",
   "bin": {
     "crossfire": "bin/crossfire"

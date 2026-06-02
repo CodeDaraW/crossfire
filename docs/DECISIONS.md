@@ -6,7 +6,7 @@ This log records durable decisions from the planning docs and the user/Codex/Cla
 
 Status: accepted
 
-Crossfire should match the capability class of `openai/codex-plugin-cc`, including review, adversarial review, rescue/task, background jobs, status/result/cancel, setup/doctor, prompt skill suite, gate, schema output, and resume/session handling.
+Crossfire should match the capability class of `openai/codex-plugin-cc`, including code review, adversarial review, delegated tasks (`rescue`/`task`), background jobs, status/result/cancel, setup/doctor, prompt skill suite, gate, schema output, and resume/session handling.
 
 Rejected alternative: build a small demo or a simple prompt wrapper around `git diff`.
 
@@ -16,7 +16,7 @@ Status: accepted
 
 The user explicitly does not want a phase split based on AI development cost. Adapter probes, smoke tests, and implementation ordering still matter, but they are support gates and dependency order, not scope cuts.
 
-Rejected alternative: defer background jobs, gate, rescue/task, or prompt skills to a later "final" version.
+Rejected alternative: defer background jobs, gate, delegated tasks, or prompt skills to a later "final" version.
 
 ## D-003: Node CLI is the only behavior runtime
 
@@ -34,11 +34,11 @@ Crossfire is a cross-agent tool. By default it uses available non-self reviewers
 
 Rejected alternative: silently fall back to self-review when no other agent is available.
 
-## D-005: Review lane and rescue/task lane are separate
+## D-005: Review lane and task delegation lane are separate
 
 Status: accepted
 
-`review`, `adversarial-review`, and `gate` are always read-only. `rescue` and `task` are the only write-capable path and must record their safety state.
+`review`, `adversarial-review`, and `gate` are always read-only. Delegated task commands (`rescue` and `task`) are the only write-capable path and must record their safety state.
 
 Rejected alternative: let review automatically apply fixes.
 

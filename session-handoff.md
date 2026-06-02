@@ -4,7 +4,7 @@
 
 - Goal: Make harness-generated project records real after flattening the Crossfire repo into the root directory.
 - Current status: Documentation/harness artifacts have been replaced with Crossfire-specific content. Baseline verification passes in the flattened repo root.
-- Branch / commit: Current branch has recent commits `817a881 Flatten crossfire project into repo root` and `8e620e5 Add crossfire cross-agent review/rescue system`.
+- Branch / commit: Current branch has recent commits `817a881 Flatten crossfire project into repo root` and `8e620e5 Add crossfire cross-agent review/task-delegation system`.
 
 ## Completed This Session
 

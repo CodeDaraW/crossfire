@@ -1,6 +1,6 @@
 ---
 name: crossfire
-description: Cross-agent code review and rescue. Use when the user wants another coding agent (Cursor, Claude Code, or Codex) to review the current changes, run an adversarial/design-challenge review, gate a turn before finishing, or hand off an investigation/fix to a different agent (cross review, 交叉评审, adversarial review, review gate, rescue, cross-agent handoff, 交叉委派).
+description: Cross-agent code review and task delegation. Use when the user wants another coding agent (Cursor, Claude Code, or Codex) to review code, run an adversarial/design-challenge review, gate a turn before finishing, or hand off an investigation/fix to a different agent (cross review, 交叉评审, adversarial review, review gate, rescue, delegate task, 分派任务).
 ---
 
 # Crossfire

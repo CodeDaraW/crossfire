@@ -21,10 +21,10 @@
     {
       "id": "feat-003",
       "name": "Rescue/task lane runtime",
-      "description": "Read-only or write-capable delegated task execution with executor adapters, intent classification, repo mutation safety checks, touched file reporting, and session hints.",
+      "description": "Read-only or write-capable task delegation with executor adapters, intent classification, repo mutation safety checks, touched file reporting, and session hints.",
       "dependencies": ["feat-002"],
       "status": "implemented-verified-local",
-      "evidence": "./init.sh passed on 2026-06-01; tests cover write rescue, read-only rescue, and already-dirty touched_files accounting."
+      "evidence": "./init.sh passed on 2026-06-01; tests cover write-capable delegated tasks, read-only delegated tasks, and already-dirty touched_files accounting."
     },
     {
       "id": "feat-004",
@@ -37,7 +37,7 @@
     {
       "id": "feat-005",
       "name": "Host integration assets",
-      "description": "Portable skills and thin host shells for Codex, Cursor, and Claude Code, including Claude gate/rescue assets and Cursor command assets.",
+      "description": "Portable skills and thin host shells for Codex, Cursor, and Claude Code, including Claude gate/task-delegation assets and Cursor command assets.",
       "dependencies": ["feat-002", "feat-003"],
       "status": "implemented-needs-real-host-verification",
       "evidence": "Assets exist under skills/ and hosts/; README now documents the agent-first UX: Codex skill usage, Claude/Cursor crossfire-* commands, CLI as runtime/debug layer, configuration, FAQ, Apache-2.0 license, and codex-plugin-cc acknowledgements. README.zh-Hans.md provides the Simplified Chinese version. Project naming is now Crossfire across package/bin/skills/commands/config/env/state. The user-facing bin/crossfire wrapper is covered by smoke verification, while internal JS re-entry remains on bin/crossfire.mjs by design. ./init.sh passed on 2026-06-01 22:16 after the wrapper coverage update."
@@ -53,7 +53,7 @@
     {
       "id": "feat-007",
       "name": "Real-agent regression matrix",
-      "description": "Keep a repeatable E2E matrix for Cursor review, Codex review, Claude review, background review, gate, and write rescue.",
+      "description": "Keep a repeatable E2E matrix for Cursor review, Codex review, Claude review, background review, gate, and write-capable delegated tasks.",
       "dependencies": ["feat-006"],
       "status": "not-started",
       "evidence": "Manual real-agent matrix was last run on 2026-05-30 before flattening; rerun and document it against the flattened repo."

@@ -18,4 +18,5 @@ crossfire setup  [--enable-gate|--disable-gate] [--json]
 
 - Default reviewers = all available agents minus self.
 - `--only` / `--reviewer` select reviewers; `--with` is a deprecated alias of `--reviewer`.
+- For host command shorthand, bare reviewer names such as `codex` or `claude,codex` select those reviewers.
 - Lanes: review/adversarial-review/gate are read-only; rescue/task can be write-capable.

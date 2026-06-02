@@ -55,13 +55,13 @@
 ## Decisions Made
 
 - **Use codex-plugin-cc as the completeness benchmark**:
-  - Context: The target is not a demo and should include review, rescue/task, background jobs, gate, setup/doctor, prompt skills, schema output, and resume/session handling.
+  - Context: The target is not a demo and should include code review, task delegation, background jobs, gate, setup/doctor, prompt skills, schema output, and resume/session handling.
   - Alternatives considered: A smaller prompt-wrapper or review-only skill was rejected.
 - **Node CLI is the single runtime**:
   - Context: Argument parsing, Git context, schema normalization, state, jobs, and arbitration need one source of truth.
   - Alternatives considered: Bash-first and per-host implementations were rejected.
-- **Keep review and rescue/task as separate lanes**:
-  - Context: Review/adversarial/gate must stay read-only; write capability belongs only to rescue/task.
+- **Keep review and task delegation as separate lanes**:
+  - Context: Review/adversarial/gate must stay read-only; write capability belongs only to delegated tasks.
   - Alternatives considered: Letting review auto-fix was rejected.
 - **Default deterministic arbitration**:
   - Context: Multi-reviewer aggregation must be reproducible and must not invent findings.
@@ -102,7 +102,7 @@ Latest README update:
 - Added install prerequisites (`~/.local/bin` and `PATH`).
 - Documented exactly what `scripts/install.mjs` installs.
 - Added project initialization flow using `doctor` / `setup`.
-- Added quick manual review/background/rescue test commands.
+- Added quick manual review/background/task-delegation test commands.
 - Reorganized into What You Get, Install, First Run, Usage, Typical Flows, Configuration, Safety, FAQ.
 - Added a Simplified Chinese version with matching content.
 - Added Apache-2.0 license sections and `openai/codex-plugin-cc` acknowledgements to both READMEs.

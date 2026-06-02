@@ -2,13 +2,13 @@
 
 ## Purpose
 
-Crossfire is a cross-agent code review and rescue system for Codex, Cursor, and Claude Code. It generalizes the `codex-plugin-cc` idea from a one-way "Claude Code calls Codex" workflow into a multi-host system where the current host can ask other coding agents to review or handle a delegated task.
+Crossfire is a cross-agent code review and task delegation system for Codex, Cursor, and Claude Code. It generalizes the `codex-plugin-cc` idea from a one-way "Claude Code calls Codex" workflow into a multi-host system where the current host can ask other coding agents to review code or handle a delegated task.
 
 The product target is the complete `codex-plugin-cc` style capability set, not a demo. Implementation cost is not used to shrink product scope.
 
 ## Users
 
-- A developer working in Codex, Cursor, or Claude Code who wants independent review from another coding agent.
+- A developer working in Codex, Cursor, or Claude Code who wants independent code review from another coding agent.
 - A developer who wants to delegate a focused investigation or fix to another agent while preserving review safety.
 - A future agent session that needs a durable, testable workflow rather than ad hoc prompts.
 
@@ -28,9 +28,9 @@ Contract:
 - Default reviewer set is all available non-self agents.
 - Self review requires explicit opt-in through `--allow-self` or a direct `--only` selection.
 - Crossfire collects Git context, invokes reviewers, normalizes output, stores raw output, and deterministically arbitrates findings.
-- Review must never auto-fix code. If a fix is desired, use the rescue/task lane and then review the result.
+- Code review must never auto-fix code. If a fix is desired, use the task delegation lane and then review the result.
 
-### Rescue / Task Lane
+### Task Delegation Lane
 
 Commands:
 
@@ -52,7 +52,7 @@ Contract:
 - `review`: normal code review.
 - `adversarial-review`: challenge design assumptions and release safety.
 - `gate`: stop/review gate, blocking only where the host supports it.
-- `rescue`: user-facing delegation entry.
+- `rescue`: user-facing task delegation entry.
 - `task`: thin internal task runtime.
 - `status`: inspect background jobs.
 - `result`: retrieve completed job output and raw reviewer logs.
@@ -74,9 +74,9 @@ Crossfire is considered product-complete only when these are all true:
 
 - Cursor, Claude, and Codex adapters have tested review and task invocation contracts.
 - Review-only lane cannot silently mutate the repo.
-- Rescue/task write changes are auditable, including changes to pre-dirty files.
+- Delegated task write changes are auditable, including changes to pre-dirty files.
 - Background jobs survive normal CLI return, expose status/result/cancel, and do not hide partial coverage.
-- Real E2E covers Cursor review, Codex review, Claude review, background review, gate, and write rescue.
+- Real E2E covers Cursor review, Codex review, Claude review, background review, gate, and write delegation.
 
 ## Current Documentation
 

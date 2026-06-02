@@ -61,7 +61,7 @@ From the 2026-05-30 white-box and black-box pass before the repo flattening:
 - Real Cursor review: completed, schema-valid, no repo mutation
 - Real Codex review: completed, schema-valid, no repo mutation
 - Real Claude review: completed, schema-valid, no repo mutation
-- Real Codex write rescue: created `rescue-note.txt`, recorded `touched_files=["rescue-note.txt"]`
+- Real Codex write-capable delegated task: created `rescue-note.txt`, recorded `touched_files=["rescue-note.txt"]`
 - Background job with repo-external `CROSSFIRE_DATA_DIR`: completed and returned result
 
 Real-agent E2E should be rerun after flattening for adapter, state, permission, and host-integration changes.
@@ -171,5 +171,5 @@ Suggested matrix:
 - Claude as reviewer
 - background review plus `status --wait` and `result --json`
 - gate ALLOW/BLOCK path
-- write rescue and read-only rescue
+- write-capable and read-only delegated tasks
 - branch and commit target review with redacted secret-path changes

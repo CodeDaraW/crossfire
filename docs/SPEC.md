@@ -19,7 +19,7 @@ Commands:
 - `review`: normal read-only cross-agent review.
 - `adversarial-review`: read-only challenge review focused on release/design risk.
 - `gate`: stop-time ALLOW/BLOCK review gate.
-- `rescue`: user-facing delegation for investigation or fix work.
+- `rescue`: user-facing task delegation for investigation or fix work.
 - `task`: thin internal task runtime for executor delegation.
 - `status`: list or inspect background jobs.
 - `result`: render a finished job result and optional raw reviewer output.
@@ -93,6 +93,7 @@ PATH-based first; expensive capability probes are lazy except in `doctor`.
 Default reviewer selection:
 
 - requested `--only` or `--reviewer` wins.
+- if no explicit reviewer flag is present and all review positionals are known agent names, treat them as a host-command shorthand for `--reviewer`.
 - otherwise use all available reviewers except `self`.
 - unknown `self` warns and does not exclude any reviewer.
 - no usable reviewer is an error, not silent self-review.
@@ -343,7 +344,7 @@ Real-agent E2E should cover:
 - Claude reviewer
 - background review plus `status --wait` and `result --json`
 - gate ALLOW/BLOCK path
-- write rescue and read-only rescue
+- write-capable and read-only delegated tasks
 - branch and commit targets with redacted secret-path changes
 
 ## Non-Goals

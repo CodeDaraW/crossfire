@@ -1,5 +1,5 @@
 ---
-description: Delegate an investigation or fix to another agent (rescue lane).
+description: Delegate investigation, an explicit fix request, or follow-up fix work to another agent.
 disable-model-invocation: true
 ---
 

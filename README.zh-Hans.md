@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-跨 Agent 进行 Code Review 与问题排查修复，支持 **Codex**、**Cursor**、**Claude Code**。
+跨 Agent 代码审查与任务分派，支持 **Codex**、**Cursor**、**Claude Code**。
 
 ## 安装
 
@@ -49,15 +49,15 @@ crossfire-review
 | 操作 | Codex | Claude Code | Cursor |
 |------|-------|-------------|--------|
 | 检查环境 | `Use crossfire to check setup` | `/crossfire-setup` | `crossfire-setup` |
-| 审查 | `Use crossfire to review` | `/crossfire-review` | `crossfire-review` |
+| 审查代码 | `Use crossfire to review code` | `/crossfire-review` | `crossfire-review` |
 | adversarial review | `Use crossfire adversarial review` | `/crossfire-adversarial-review` | `crossfire-adversarial-review` |
-| rescue（只读） | `Use crossfire rescue in read-only mode` | `/crossfire-rescue --read-only` | `crossfire-rescue --read-only` |
-| rescue（可写） | `Use crossfire rescue with write` | `/crossfire-rescue --write` | `crossfire-rescue --write` |
+| 分派任务（只读） | `Use crossfire to delegate a read-only investigation` | `/crossfire-rescue --read-only` | `crossfire-rescue --read-only` |
+| 分派任务（可写） | `Use crossfire to delegate a fix with write access` | `/crossfire-rescue --write` | `crossfire-rescue --write` |
 | 状态 | `Use crossfire status` | `/crossfire-status` | `crossfire-status` |
 | 结果 | `Use crossfire result` | `/crossfire-result <id>` | `crossfire-result <id>` |
 | 取消 | `Use crossfire cancel` | `/crossfire-cancel <id>` | `crossfire-cancel <id>` |
 
-`review` 命令只读，`rescue --write` 是唯一可委派写操作的路径。
+审查代码只读；带 `--write` 的分派任务是唯一允许外部 Agent 改代码的路径。
 
 ## CLI 参考
 
@@ -72,7 +72,7 @@ crossfire result <job-id>
 crossfire doctor --self codex
 ```
 
-直接调用 CLI 时，`--self` 表示当前宿主。要指定目标 Agent，用 `--only` 或 `--executor`。
+直接调用 CLI 时，`--self` 表示当前宿主。要指定目标 Agent，用 `--only` 或 `--executor`。审查代码时也支持裸 agent 名作为简写，所以 `crossfire review codex` 只会选择 Codex。
 
 ## 配置
 
@@ -81,7 +81,7 @@ crossfire doctor --self codex
 ```json
 {
   "reviewers": {
-    "cursor": { "bin": "cursor-Agent", "timeout_ms": 600000 },
+    "cursor": { "bin": "cursor-agent", "timeout_ms": 600000 },
     "claude": { "bin": "claude", "timeout_ms": 600000 },
     "codex": { "bin": "codex", "timeout_ms": 600000 }
   }
@@ -92,9 +92,9 @@ crossfire doctor --self codex
 
 - 默认排除 self（`--allow-self` 可覆盖）
 - `review`、`adversarial-review`、`gate` 只读
-- `rescue` 是唯一可写路径
+- 分派任务是唯一可写路径
 - 调用外部 Agent CLI 前，清除环境变量中的敏感变量
-- review 前后对比 repo fingerprint，检测审查期间的仓库改动
+- 审查代码前后对比 repo fingerprint，检测审查期间的仓库改动
 
 ## FAQ
 
@@ -105,12 +105,12 @@ crossfire doctor --self codex
 **会安装到每个项目吗？**   
 不会。装一次，在任意 git 仓库使用。
 
-**review 能改文件吗？**   
-不能。委派写操作通过宿主命令或 skill 使用 `rescue --write`。
+**审查代码能改文件吗？**
+不能。分派任务带 `--write` 时才允许外部 Agent 改代码。
 
 **任务状态存哪？**  
 `~/.crossfire/state/<repo-slug>-<hash>/`
 
 ## 致谢
 
-受 [`openai/codex-plugin-cc`](https://github.com/openai/codex-plugin-cc) 启发。感谢 OpenAI 团队提供的跨 Agent review/rescue 产品形态。
+受 [`openai/codex-plugin-cc`](https://github.com/openai/codex-plugin-cc) 启发。感谢 OpenAI 团队提供的跨 Agent 审查代码和分派任务的产品形态。

@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-Hans.md)
 
-Cross-agent code review and rescue across **Codex**, **Cursor**, and **Claude Code**.
+Cross-agent code review and task delegation across **Codex**, **Cursor**, and **Claude Code**.
 
 ## Install
 
@@ -54,15 +54,15 @@ First time? Check readiness first:
 | Action | Codex | Claude Code | Cursor |
 |--------|-------|-------------|--------|
 | Setup | `Use crossfire to check setup` | `/crossfire-setup` | `crossfire-setup` |
-| Review | `Use crossfire to review` | `/crossfire-review` | `crossfire-review` |
+| Review code | `Use crossfire to review code` | `/crossfire-review` | `crossfire-review` |
 | Adversarial review | `Use crossfire adversarial review` | `/crossfire-adversarial-review` | `crossfire-adversarial-review` |
-| Rescue (read-only) | `Use crossfire rescue in read-only mode` | `/crossfire-rescue --read-only` | `crossfire-rescue --read-only` |
-| Rescue (write) | `Use crossfire rescue with write` | `/crossfire-rescue --write` | `crossfire-rescue --write` |
+| Delegate task (read-only) | `Use crossfire to delegate a read-only investigation` | `/crossfire-rescue --read-only` | `crossfire-rescue --read-only` |
+| Delegate task (write) | `Use crossfire to delegate a fix with write access` | `/crossfire-rescue --write` | `crossfire-rescue --write` |
 | Status | `Use crossfire status` | `/crossfire-status` | `crossfire-status` |
 | Result | `Use crossfire result` | `/crossfire-result <id>` | `crossfire-result <id>` |
 | Cancel | `Use crossfire cancel` | `/crossfire-cancel <id>` | `crossfire-cancel <id>` |
 
-Review commands are read-only. Rescue with `--write` is the only path for delegated edits.
+Code review commands are read-only. Delegated tasks with `--write` are the only path for file edits by another agent.
 
 ## CLI Reference
 
@@ -77,7 +77,7 @@ crossfire result <job-id>
 crossfire doctor --self codex
 ```
 
-Pass `--self` to identify the current host. Use `--only` or `--executor` to target a specific agent.
+Pass `--self` to identify the current host. Use `--only` or `--executor` to target a specific agent. For review commands, a bare agent name is also accepted as shorthand, so `crossfire review codex` selects Codex only.
 
 ## Config
 
@@ -97,7 +97,7 @@ Most projects need no config. For custom binary paths or timeouts, add `.crossfi
 
 - Self is excluded by default (`--allow-self` to override)
 - `review`, `adversarial-review`, `gate` are read-only
-- `rescue` is the only write-capable lane
+- Delegated tasks are the only write-capable lane
 - Secret-looking env vars are scrubbed before spawning child agents
 - Repo fingerprints detect mutation during review
 
@@ -107,13 +107,13 @@ Most projects need no config. For custom binary paths or timeouts, add `.crossfi
 
 **Does it install into every project?** No. Install once, then use in any git repo.
 
-**Can review modify files?** No. Use rescue `--write` for delegated edits.
+**Can code review modify files?** No. Use a delegated task with `--write` when another agent should edit files.
 
 **Where does job state live?** `~/.crossfire/state/<repo-slug>-<hash>/`
 
 ## Acknowledgements
 
-Inspired by [`openai/codex-plugin-cc`](https://github.com/openai/codex-plugin-cc). Thanks to the OpenAI team for the original cross-agent review/rescue product shape.
+Inspired by [`openai/codex-plugin-cc`](https://github.com/openai/codex-plugin-cc). Thanks to the OpenAI team for the original cross-agent pattern for reviewing code and delegating tasks.
 
 ## License
 

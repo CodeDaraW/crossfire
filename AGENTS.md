@@ -3,7 +3,7 @@
 Project harness for reliable agent-assisted development in Crossfire.
 
 Crossfire is a Node CLI plus host integration assets for cross-agent code
-review and rescue across Codex, Cursor, and Claude Code. The authoritative
+review and task delegation across Codex, Cursor, and Claude Code. The authoritative
 product direction is the current implementation plus the docs listed below.
 Earlier plan/review process docs have been extracted into these current docs.
 
@@ -33,7 +33,7 @@ If baseline verification is failing, repair that first before adding new scope.
 - **Update artifacts**: Before ending session, update `progress.md` and `feature_list.json`
 - **Stay in scope**: Don't modify files unrelated to the current feature
 - **Leave clean state**: Next session must be able to run `./init.sh` immediately
-- **Respect the lane boundary**: review/adversarial/gate are read-only; only rescue/task may be write-capable
+- **Respect the lane boundary**: review/adversarial/gate are read-only; only delegated task commands (`rescue`/`task`) may be write-capable
 - **Do not hide agent failures**: non-zero exits, timeouts, and partial reviewer coverage must be represented explicitly
 - **Do not infer current CLI contracts from old plans**: use tests, `doctor`, and direct CLI probes
 

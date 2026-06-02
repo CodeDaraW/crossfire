@@ -16,7 +16,7 @@ docs/                product, architecture, decisions, plans, reviews
 
 ## Runtime Boundary
 
-The Node CLI is the single source of behavior. Host assets must stay thin: they pass user intent and host identity to `crossfire`, then render or return the result. They should not duplicate Git context collection, reviewer selection, arbitration, state handling, or rescue logic.
+The Node CLI is the single source of behavior. Host assets must stay thin: they pass user intent and host identity to `crossfire`, then render or return the result. They should not duplicate Git context collection, reviewer selection, arbitration, state handling, or task delegation logic.
 
 The installable executable is `bin/crossfire`. It is a small shell wrapper that
 finds Node and then runs `bin/crossfire.mjs`. Internal re-entry paths such as
@@ -29,7 +29,7 @@ wrapper so the production executable is covered.
 - `src/cli/`: command dispatch and argument parsing.
 - `src/git/`: repo root, target resolution, context collection, secret-path redaction, and mutation fingerprinting.
 - `src/reviewers/`: review adapters for Cursor, Claude, and Codex.
-- `src/executors/`: task/rescue adapters for Cursor, Claude, and Codex.
+- `src/executors/`: task delegation adapters for Cursor, Claude, and Codex.
 - `src/runtime/`: process execution, environment scrubbing, config, jobs, state, review runner, and task runner.
 - `src/prompts/`: prompt templates for review, adversarial review, gate, and task.
 - `src/schema/`: tolerant extraction and normalization of reviewer JSON.
@@ -61,7 +61,7 @@ Important constraints:
 - `repo_changed_during_review` must be represented as a safety issue.
 - Raw reviewer output is preserved for background jobs.
 
-## Rescue / Task Flow
+## Task Delegation Flow
 
 ```text
 host command / skill
@@ -126,7 +126,7 @@ The adapter path expands `~` in fixed args and injects those args into review/ta
 - `skills/crossfire-runtime/`: runtime usage guidance.
 - `skills/crossfire-result-handling/`: how to handle and present results.
 - `skills/crossfire-prompting/`: prompt patterns and anti-patterns.
-- `hosts/claude/`: Claude slash commands, Stop hook, and rescue agent.
+- `hosts/claude/`: Claude slash commands, Stop hook, and task delegation agent.
 - `hosts/cursor/`: Cursor command assets.
 
 The intended shape is mixed integration: shared runtime plus portable skills, with native thin shells only where hooks or deterministic commands require them.
