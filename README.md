@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-Hans.md)
 
-Cross-agent code review and task delegation across **Codex**, **Cursor**, and **Claude Code**.
+Cross-agent code review and task delegation, supporting **Codex**, **Cursor**, and **Claude Code**.
 
 ## Install
 
@@ -40,27 +40,29 @@ Use crossfire to review my current changes.
 
 **Cursor:**
 ```
-crossfire-review
+/crossfire-review
 ```
 
 First time? Check readiness first:
 
 - **Codex:** `Use crossfire to check setup for this repo`
 - **Claude:** `/crossfire-setup`
-- **Cursor:** `crossfire-setup`
+- **Cursor:** `/crossfire-setup`
+
+Note: Codex TUI uses natural-language skill prompts. In Codex App, Crossfire can also be invoked as a slash command, such as `/crossfire setup`.
 
 ## Commands
 
 | Action | Codex | Claude Code | Cursor |
 |--------|-------|-------------|--------|
-| Setup | `Use crossfire to check setup` | `/crossfire-setup` | `crossfire-setup` |
-| Review code | `Use crossfire to review code` | `/crossfire-review` | `crossfire-review` |
-| Adversarial review | `Use crossfire adversarial review` | `/crossfire-adversarial-review` | `crossfire-adversarial-review` |
-| Delegate task (read-only) | `Use crossfire to delegate a read-only investigation` | `/crossfire-rescue --read-only` | `crossfire-rescue --read-only` |
-| Delegate task (write) | `Use crossfire to delegate a fix with write access` | `/crossfire-rescue --write` | `crossfire-rescue --write` |
-| Status | `Use crossfire status` | `/crossfire-status` | `crossfire-status` |
-| Result | `Use crossfire result` | `/crossfire-result <id>` | `crossfire-result <id>` |
-| Cancel | `Use crossfire cancel` | `/crossfire-cancel <id>` | `crossfire-cancel <id>` |
+| Setup | `Use crossfire to check setup` | `/crossfire-setup` | `/crossfire-setup` |
+| Review | `Use crossfire to review` | `/crossfire-review` | `/crossfire-review` |
+| Adversarial review | `Use crossfire adversarial review` | `/crossfire-adversarial-review` | `/crossfire-adversarial-review` |
+| Delegate task (read-only) | `Use crossfire to delegate a read-only investigation` | `/crossfire-rescue --read-only` | `/crossfire-rescue --read-only` |
+| Delegate task (write) | `Use crossfire to delegate a fix with write access` | `/crossfire-rescue --write` | `/crossfire-rescue --write` |
+| Status | `Use crossfire status <id>` | `/crossfire-status <id>` | `/crossfire-status <id>` |
+| Result | `Use crossfire result <id>` | `/crossfire-result <id>` | `/crossfire-result <id>` |
+| Cancel | `Use crossfire cancel <id>` | `/crossfire-cancel <id>` | `/crossfire-cancel <id>` |
 
 Code review commands are read-only. Delegated tasks with `--write` are the only path for file edits by another agent.
 

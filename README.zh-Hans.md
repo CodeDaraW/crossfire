@@ -24,38 +24,45 @@ export PATH="$HOME/.local/bin:$PATH"
 在任意 git 仓库中打开 Coding Agent：
 
 **Codex:**
+
 ```
 Use crossfire to review my current changes.
 ```
 
 **Claude Code:**
+
 ```
 /crossfire-review
 ```
 
 **Cursor:**
+
 ```
-crossfire-review
+/crossfire-review
 ```
 
 首次使用？先检查环境：
 
 - **Codex:** `Use crossfire to check setup for this repo`
 - **Claude:** `/crossfire-setup`
-- **Cursor:** `crossfire-setup`
+- **Cursor:** `/crossfire-setup`
+
+Note: Codex TUI 使用自然语言 skill prompt；在 Codex App 里也可以用 slash command，例如 `/crossfire setup`。
 
 ## 命令速查
 
-| 操作 | Codex | Claude Code | Cursor |
-|------|-------|-------------|--------|
-| 检查环境 | `Use crossfire to check setup` | `/crossfire-setup` | `crossfire-setup` |
-| 审查代码 | `Use crossfire to review code` | `/crossfire-review` | `crossfire-review` |
-| adversarial review | `Use crossfire adversarial review` | `/crossfire-adversarial-review` | `crossfire-adversarial-review` |
-| 分派任务（只读） | `Use crossfire to delegate a read-only investigation` | `/crossfire-rescue --read-only` | `crossfire-rescue --read-only` |
-| 分派任务（可写） | `Use crossfire to delegate a fix with write access` | `/crossfire-rescue --write` | `crossfire-rescue --write` |
-| 状态 | `Use crossfire status` | `/crossfire-status` | `crossfire-status` |
-| 结果 | `Use crossfire result` | `/crossfire-result <id>` | `crossfire-result <id>` |
-| 取消 | `Use crossfire cancel` | `/crossfire-cancel <id>` | `crossfire-cancel <id>` |
+
+| 操作                 | Codex                           | Claude Code                     | Cursor                          |
+| ------------------ | ------------------------------- | ------------------------------- | ------------------------------- |
+| 检查环境               | `Use crossfire to check setup`                 | `/crossfire-setup`              | `/crossfire-setup`              |
+| Review             | `Use crossfire to review`                      | `/crossfire-review`             | `/crossfire-review`             |
+| Adversarial Review | `Use crossfire adversarial review`             | `/crossfire-adversarial-review` | `/crossfire-adversarial-review` |
+| 分派任务（只读）           | `Use crossfire to delegate a read-only investigation` | `/crossfire-rescue --read-only` | `/crossfire-rescue --read-only` |
+| 分派任务（可写）           | `Use crossfire to delegate a fix with write access`   | `/crossfire-rescue --write`     | `/crossfire-rescue --write`     |
+| 状态                 | `Use crossfire status <id>`                    | `/crossfire-status <id>`        | `/crossfire-status <id>`        |
+| 结果                 | `Use crossfire result <id>`                    | `/crossfire-result <id>`        | `/crossfire-result <id>`        |
+| 取消                 | `Use crossfire cancel <id>`                    | `/crossfire-cancel <id>`        | `/crossfire-cancel <id>`        |
+
 
 审查代码只读；带 `--write` 的分派任务是唯一允许外部 Agent 改代码的路径。
 
@@ -98,11 +105,10 @@ crossfire doctor --self codex
 
 ## FAQ
 
-**需要给每个 Agent 单独账号吗？**   
+**需要给每个 Agent 单独账号吗？**  
 不需要。Crossfire 使用 CLI 已有的登录状态。
 
-
-**会安装到每个项目吗？**   
+**会安装到每个项目吗？**  
 不会。装一次，在任意 git 仓库使用。
 
 **审查代码能改文件吗？**
@@ -113,4 +119,4 @@ crossfire doctor --self codex
 
 ## 致谢
 
-受 [`openai/codex-plugin-cc`](https://github.com/openai/codex-plugin-cc) 启发。感谢 OpenAI 团队提供的跨 Agent 审查代码和分派任务的产品形态。
+受 `[openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc)` 启发。感谢 OpenAI 团队提供的跨 Agent 审查代码和分派任务的产品形态。
