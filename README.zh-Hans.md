@@ -1,6 +1,6 @@
 # Crossfire
 
-[English](README.md)
+[English](README.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md)
 
 跨 Agent 代码审查与任务分派，支持 **Codex**、**Cursor**、**Claude Code**。
 

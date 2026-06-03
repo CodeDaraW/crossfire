@@ -1,6 +1,6 @@
 # Crossfire
 
-[简体中文](README.zh-Hans.md)
+[English](README.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md)
 
 Cross-agent code review and task delegation, supporting **Codex**, **Cursor**, and **Claude Code**.
 
