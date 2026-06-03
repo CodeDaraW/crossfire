@@ -13,18 +13,18 @@ Cross-agent code review and task delegation, supporting **Codex**, **Cursor**, a
 Requirements: Node.js 18+, `git`, and at least one non-self agent CLI (`cursor-agent`, `claude`, or `codex`) installed and authenticated.
 
 ```bash
-mkdir -p ~/.local/bin
+git clone https://github.com/CodeDaraW/crossfire.git
+cd crossfire
 node scripts/install.mjs
-export PATH="$HOME/.local/bin:$PATH"
 ```
 
-The installer writes symlinks into agent home directories it detects. If a host is skipped, open that agent once so it creates its home directory, then reinstall. Use `--copy` for a snapshot instead:
+The installer creates `~/.local/bin/crossfire` and writes symlinks into agent home directories it detects. If a host is skipped, open that agent once so it creates its home directory, then reinstall. Use `--copy` for a snapshot instead:
 
 ```bash
 node scripts/install.mjs --copy
 ```
 
-Add the `export PATH` line to your shell config to make it persistent — host commands call `crossfire` by name.
+If a host command cannot find `crossfire`, make sure `~/.local/bin` is on that agent's launch `PATH`.
 
 Restart your agent if it doesn't pick up new skills/commands automatically.
 

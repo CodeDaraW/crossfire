@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-02T17:30:00+08:00",
+  "updated_at": "2026-06-03T15:53:00+08:00",
   "source_of_truth": "Use this file for active work selection; use docs/IMPLEMENTATION_STATUS.md for verification detail.",
   "features": [
     {
@@ -40,7 +40,7 @@
       "description": "Portable skills and thin host shells for Codex, Cursor, and Claude Code, including Claude gate/task-delegation assets and Cursor command assets.",
       "dependencies": ["feat-002", "feat-003"],
       "status": "implemented-needs-real-host-verification",
-      "evidence": "Assets exist under skills/ and hosts/; README now documents the agent-first UX: Codex skill usage, Claude/Cursor crossfire-* commands, CLI as runtime/debug layer, configuration, FAQ, Apache-2.0 license, and codex-plugin-cc acknowledgements. README.zh-Hans.md provides the Simplified Chinese version. Project naming is now Crossfire across package/bin/skills/commands/config/env/state. The user-facing bin/crossfire wrapper is covered by smoke verification, while internal JS re-entry remains on bin/crossfire.mjs by design. Cursor and Claude review/adversarial/rescue command assets now explicitly parse natural-language agent mentions into --reviewer/--executor instead of blindly passing $ARGUMENTS as focus/request text; tests/host-assets.test.mjs guards this. ./init.sh passed on 2026-06-02 17:30 with 51 tests and SMOKE OK."
+      "evidence": "Assets exist under skills/ and hosts/; README now documents the agent-first UX: Codex skill usage, Claude/Cursor crossfire-* commands, CLI as runtime/debug layer, configuration, FAQ, Apache-2.0 license, and codex-plugin-cc acknowledgements. README.zh-Hans.md provides the Simplified Chinese version. Project naming is now Crossfire across package/bin/skills/commands/config/env/state. The user-facing bin/crossfire wrapper is covered by smoke verification, while internal JS re-entry remains on bin/crossfire.mjs by design. Cursor and Claude review/adversarial/rescue command assets now explicitly parse natural-language agent mentions into --reviewer/--executor instead of blindly passing $ARGUMENTS as focus/request text; tests/host-assets.test.mjs guards this. Install now creates ~/.local/bin automatically and links crossfire there even when the directory does not pre-exist; tests/install.test.mjs guards this. ./init.sh passed on 2026-06-03 15:53 with 52 tests and SMOKE OK."
     },
     {
       "id": "feat-006",

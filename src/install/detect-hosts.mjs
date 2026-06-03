@@ -32,7 +32,7 @@ export async function detectHostTargets(env = process.env) {
   targets.push({ host: "cursor", kind: "commands", dir: join(cursorHome, "commands"), parent: cursorHome, present: await exists(cursorHome), source: "hosts/cursor/commands", merge: true });
 
   const localBin = join(home, ".local", "bin");
-  targets.push({ host: "all", kind: "bin", dir: join(localBin, "crossfire"), parent: localBin, present: await exists(localBin) });
+  targets.push({ host: "all", kind: "bin", dir: join(localBin, "crossfire"), parent: localBin, present: true });
 
   return targets;
 }

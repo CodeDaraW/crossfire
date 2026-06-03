@@ -3,7 +3,7 @@
 ## Current Objective
 
 - Goal: Keep Crossfire host integration assets aligned with the runtime contract.
-- Current status: Documentation/harness artifacts have been replaced with Crossfire-specific content. Cursor and Claude review/adversarial/rescue command assets now instruct host agents to parse natural-language agent mentions into `--reviewer` or `--executor` instead of passing the whole phrase as focus/request text. Baseline verification passes in the flattened repo root.
+- Current status: Documentation/harness artifacts have been replaced with Crossfire-specific content. Cursor and Claude review/adversarial/rescue command assets now instruct host agents to parse natural-language agent mentions into `--reviewer` or `--executor` instead of passing the whole phrase as focus/request text. Install now creates `~/.local/bin/crossfire` without requiring the directory to pre-exist. Baseline verification passes in the flattened repo root.
 - Branch / commit: Current branch has recent commits `817a881 Flatten crossfire project into repo root` and `8e620e5 Add crossfire cross-agent review/task-delegation system`.
 
 ## Completed This Session
@@ -26,6 +26,9 @@
 - [x] Fixed Cursor/Claude host command prompts so named agents in natural
       language are translated to `--reviewer` or `--executor`.
 - [x] Added `tests/host-assets.test.mjs` to guard the command prompt contract.
+- [x] Simplified install so `node scripts/install.mjs` creates
+      `~/.local/bin/crossfire` even when `~/.local/bin` does not exist.
+- [x] Updated README install docs to show clone, `cd`, and one install command.
 
 ## Verification Evidence
 
@@ -39,6 +42,7 @@
 | Crossfire rename baseline | `./init.sh` | passed | 2026-06-01 21:40 Asia/Shanghai; 48 node tests passed; smoke returned `SMOKE OK`. |
 | Executable wrapper coverage baseline | `./init.sh` | passed | 2026-06-01 22:16 Asia/Shanghai; 48 node tests passed; smoke exercised `bin/crossfire` and returned `SMOKE OK`. |
 | Host command named-agent parsing baseline | `./init.sh` | passed | 2026-06-02 17:30 Asia/Shanghai; 51 node tests passed; smoke returned `SMOKE OK`. |
+| Install simplification baseline | `./init.sh` | passed | 2026-06-03 15:53 Asia/Shanghai; 52 node tests passed; smoke returned `SMOKE OK`. |
 | Codex setup probe | `crossfire setup --self codex` | passed | 2026-06-01 22:16 Asia/Shanghai; reviewers available: `cursor, claude`. |
 | Rename residual scan | `rg --no-ignore` + `find` | passed | No old project name remained outside `.git`, `node_modules`, and `.agents`. |
 
@@ -60,6 +64,7 @@
 - `hosts/claude/agents/crossfire-rescue.md`
 - `hosts/cursor/commands/crossfire-*.md`
 - `tests/host-assets.test.mjs`
+- `tests/install.test.mjs`
 - `skills/crossfire*`
 - `docs/PRODUCT.md`
 - `docs/ARCHITECTURE.md`

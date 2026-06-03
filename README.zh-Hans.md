@@ -13,14 +13,13 @@
 需要：Node.js 18+、`git`、至少一个非当前 Agent 的 CLI（`cursor-agent`、`claude` 或 `codex`）已安装并登录。
 
 ```bash
-mkdir -p ~/.local/bin
+git clone https://github.com/CodeDaraW/crossfire.git
+cd crossfire
 node scripts/install.mjs
-export PATH="$HOME/.local/bin:$PATH"
 ```
 
-请把 PATH 变更持久写入 shell 或 Coding Agent 的启动环境，宿主命令会直接按名称调用 `crossfire`。
-
-安装器只会向已检测到的 Agent home 目录写入符号链接。如果某个 host 被跳过，先打开一次对应 Agent，让它创建 home 目录，然后重新安装。
+安装器会创建 `~/.local/bin/crossfire`，并向已检测到的 Agent home 目录写入符号链接。如果某个 host 被跳过，先打开一次对应 Agent，让它创建 home 目录，然后重新安装。
+如果宿主命令找不到 `crossfire`，确认 `~/.local/bin` 已经在该 Agent 的启动 `PATH` 中。
 如果 Agent 未自动识别新 skill/command，重启 Agent 即可。
 
 ## 快速开始

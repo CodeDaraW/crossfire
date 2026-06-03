@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Last Updated:** 2026-06-02 17:30 Asia/Shanghai
+**Last Updated:** 2026-06-03 15:53 Asia/Shanghai
 **Active Feature:** feat-005 - Host integration assets
 **Repository Shape:** Project was flattened from `crossfire/` into the repo root. Runtime files now live at `bin/`, `src/`, `skills/`, `hosts/`, `tests/`, and `docs/`.
 
@@ -38,11 +38,16 @@
   `--executor` instead of blindly passing `$ARGUMENTS` as focus/request text.
 - [x] `tests/host-assets.test.mjs` guards the named reviewer/executor parsing
   instructions for Cursor and Claude command assets.
+- [x] `scripts/install.mjs`/install runtime now creates `~/.local/bin` through
+  the normal install flow, so the README install path only needs clone, `cd`,
+  and `node scripts/install.mjs`.
+- [x] `tests/install.test.mjs` guards installing `crossfire` into a fresh
+  temporary HOME without a pre-existing `.local/bin` directory.
 
 ### What's In Progress
 
-- [x] Fix host command natural-language agent selection drift.
-  - Details: Cursor `/crossfire-review 让 Codex 看看` was reported to fan out to all non-self reviewers because the command template passed the full phrase as focus text. Cursor and Claude review/adversarial/rescue commands now document explicit reviewer/executor extraction rules.
+- [x] Simplify install path and README install docs.
+  - Details: The bin target is always installable; install creates `~/.local/bin` before linking `crossfire`. README and README.zh-Hans now show `git clone`, `cd crossfire`, and `node scripts/install.mjs`.
   - Blockers: none.
 
 ### What's Next
@@ -147,6 +152,9 @@ Latest entrypoint update:
 - [x] Baseline after host command named-agent parsing update: `./init.sh`
   - Result: 51 tests passed; smoke returned `SMOKE OK`.
   - Last run: 2026-06-02 17:30 Asia/Shanghai.
+- [x] Baseline after install flow simplification: `./init.sh`
+  - Result: 52 tests passed; smoke returned `SMOKE OK`.
+  - Last run: 2026-06-03 15:53 Asia/Shanghai.
 - [x] Codex host setup probe after executable wrapper coverage update
   - Result: `crossfire setup --self codex` reported reviewers `cursor, claude`.
 - [x] Rename residual scan
